@@ -86,7 +86,7 @@ main .poster {
             <a href="#">Plant Cart</a>
             <a href="#">Seeds</a>
             <a href="#">Campaign</a>
-            <a href="#">Marketplace</a>
+            <a href="{{ route('marketplace.index') }}">Marketplace</a>
         </nav>
 
         </nav>
