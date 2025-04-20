@@ -54,6 +54,7 @@ nav .icons {
 main .poster {
     position: relative;
     justify-self: center;
+    margin-top: 20px;
 }
 
 .poster button {

@@ -14,7 +14,6 @@
             background: #f9f9f9;
         }
 
-        /* Navbar Styles */
         .navbar {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -52,12 +51,11 @@
             gap: 30px;
         }
 
-        /* Donation Form Styles */
+
         header img.tree-header {
             width: 60%;
             max-height: 500px;
             object-fit: cover;
-            border-bottom: 4px solid #00a300;
             margin-left: 20%;
             margin-top: 20px;
         }
@@ -141,7 +139,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             toggleCardFields();
 
-            // Show popup if payment was successful
+
             @if(session('success'))
                 alert("{{ session('success') }}");
             @endif
@@ -150,7 +148,7 @@
 </head>
 <body>
 
-    <!-- 🌿 Navbar -->
+
     <header class="navbar">
         <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
         <nav>
@@ -172,16 +170,15 @@
         </div>
     </header>
 
-    <!-- 🌳 Tree Image -->
+
     <header>
         <img src="{{ asset('images/Big Tree Image.jpg') }}" alt="Big tree image" class="tree-header">
     </header>
 
-    <!-- 💳 Donation Form -->
+
     <form action="{{ route('donate.submit') }}" method="POST">
         @csrf
         <div class="container">
-            <!-- Left Side: Donation Amount -->
             <div class="section">
                 <h2>Choose donation amount</h2>
                 <label for="amount">Donate</label><br>
@@ -192,7 +189,6 @@
                 <small>Slide the button to your desired amount of donation</small>
             </div>
 
-            <!-- Right Side: Personal Info -->
             <div class="section">
                 <h2>Personal Information</h2>
 
@@ -210,7 +206,6 @@
                     <option value="apple_pay">Apple Pay</option>
                 </select>
 
-                <!-- Card fields (conditionally shown) -->
                 <div id="cardFields">
                     <label>Card Number</label>
                     <input type="text" name="card_number" placeholder="1234 5678 9012 3456">
@@ -224,7 +219,7 @@
             </div>
         </div>
 
-        <!-- Submit Button -->
+
         <div class="continue-button">
             <button type="submit">Make Payment</button>
         </div>
