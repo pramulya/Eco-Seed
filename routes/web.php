@@ -14,3 +14,7 @@ Route::post('/donate', [DonationController::class, 'submitDonation'])->name('don
 Route::get('/donation-history', [DonationController::class, 'history'])->name('donation.history');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/cart', DisplayCart::class)->name('cart');
+use App\Http\Controllers\ArticleController;
+Route::get('/news', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/news/{id}', [ArticleController::class, 'show'])->name('articles.show');
+

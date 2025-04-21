@@ -82,7 +82,7 @@ main .poster {
         <nav>
         <nav>
             <a href="{{ route('donate.form') }}">Donate</a>
-            <a href="#">News</a>
+            <a href="{{ route('articles.index') }}">News</a>
             <a href="#">Merch</a>
             <a href="#">Plant Cart</a>
             <a href="#">Seeds</a>
