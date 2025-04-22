@@ -70,6 +70,7 @@
             <h2>Eco-Seed</h2>
         </a>
         <nav>
+<<<<<<< HEAD
             <nav>
                 <a href="{{ route('donate.form') }}">Donate</a>
                 <a href="#">News</a>
@@ -79,6 +80,17 @@
                 <a href="#">Campaign</a>
                 <a href="#">Marketplace</a>
             </nav>
+=======
+        <nav>
+            <a href="{{ route('donate.form') }}">Donate</a>
+            <a href="{{ route('articles.index') }}">News</a>
+            <a href="#">Merch</a>
+            <a href="#">Plant Cart</a>
+            <a href="#">Seeds</a>
+            <a href="#">Campaign</a>
+            <a href="#">Marketplace</a>
+        </nav>
+>>>>>>> dba475fe01d45ab5c0c7a7647e220450469109ff
 
         </nav>
         <div class="icons">
