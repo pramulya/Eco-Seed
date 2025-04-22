@@ -9,13 +9,14 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->id();
-            $table->string('product_name');
-            $table->integer('quantity');
-            $table->decimal('price', 10, 2);
+            $table->id('cartId');
+            $table->unsignedBigInteger('product_id');
             $table->decimal('total_price', 10, 2);
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
+
     }
 
     public function down(): void

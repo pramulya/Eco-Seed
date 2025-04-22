@@ -26,37 +26,38 @@
         @php
             $totalmaximum_price = 0;
         @endphp
-
         <div class="product-container">
-            <div class="shop-name">
-                Cygnus Shop
-            </div>
 
-            @forelse($cartItems as $item)
-                        @php
-                            $totalmaximum_price += $item->total_price;
-                        @endphp
+            @forelse($cartItems as $shopId => $items)
+                    <div class="shop-name">
+                        {{ $items->first()->product->shop->shop_name ?? 'Unknown Shop' }}
+                    </div>
+                    @foreach($items as $item)
+                            @php
+                                $totalmaximum_price += $item->total_price;
+                            @endphp
 
-                        <div class="product-item">
-                            <div class="product-item-content">
-                                <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image"
-                                    class="product-image">
-                                <div class="product-details">
-                                    <p class="product-title">{{ $item->product_name }}</p>
-                                </div>
-                                <p class="product-price">Rp{{ number_format($item->total_price, 0, ',', '.') }}</p>
-                                <div class="product-actions">
-                                    <button class="delete-button" wire:click="deleteFromCart({{ $item->id }})">
-                                        <img src="{{ asset('images/recycle-bin.png') }}" alt="Delete" class="trash-icon">
-                                    </button>
-                                    <div class=" quantity-control">
-                                        <button wire:click="removeQuantity({{ $item->id }})">-</button>
-                                        <input type="text" value="{{ $item->quantity }}" readonly>
-                                        <button wire:click="addQuantity({{ $item->id }})">+</button>
+                            <div class="product-item">
+                                <div class="product-item-content">
+                                    <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image"
+                                        class="product-image">
+                                    <div class="product-details">
+                                        <p class="product-title">{{ $item->product->name }}</p>
+                                    </div>
+                                    <p class="product-price">Rp{{ number_format($item->total_price, 0, ',', '.') }}</p>
+                                    <div class="product-actions">
+                                        <button class="delete-button" wire:click="deleteFromCart({{ $item->cartId }})">
+                                            <img src="{{ asset('images/recycle-bin.png') }}" alt="Delete" class="trash-icon">
+                                        </button>
+                                        <div class="quantity-control">
+                                            <button wire:click="removeQuantity({{ $item->cartId }})">-</button>
+                                            <input type="text" value="{{ $item->quantity }}" readonly>
+                                            <button wire:click="addQuantity({{ $item->cartId }})">+</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    @endforeach
             @empty
                 <div class="empty-item">
                     <span>No Items in Cart</span>
@@ -66,8 +67,8 @@
                 <div class="total-price">
                     <p>Total Price: Rp{{ number_format($totalmaximum_price, 0, ',', '.') }}</p>
                 </div>
-                <div class="buy-class">
-                    <button onclick="window.location='{{ route('checkout') }}'">Buy</button>
+                <div>
+                    <button class="buy-button" onclick="window.location='{{ route('checkout') }}'">Buy</button>
                 </div>
             @endif
         </div>

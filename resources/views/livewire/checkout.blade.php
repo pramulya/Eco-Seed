@@ -3,6 +3,9 @@
 @endpush
 
 <div id="app">
+    @php
+        $totalmaximum_price = 0
+    @endphp
     <header class="navbar">
         <a href="{{ route('cart') }}">
             <h2>Back</h2>
@@ -15,44 +18,66 @@
         </div>
     </header>
     <div class="border-box">
-        <div class="header">
-            <span class="icon">📍</span>Alamat Pengiriman
-        </div>
-        <div>
-            <strong>Rumah Bandung · Anas</strong><br>
-            Private village cluster Seminyak C1 no 3, Jl Cikoneng, Bojongsoang, Kabupaten Bandung, Jawa Barat,
-            40288,
-            Bojong Soang, Kab. Bandung, Jawa Barat, 6281385418451
-        </div>
+        <livewire:shipping-address />
     </div>
 
     <div class="border-box">
-        <div class="header">
-            <span>Cygnus Shop</span>
-        </div>
-        <div class="item">
-            <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image" class="product-image"
-                width="50" height="50">
-            <div>
-                GATERON Magnetic Jade Series Jade / Jade Pro / Jade Gaming / Jade Max Keyboard Switch Set<br>
-                <span>Jade GAMING</span>
+        @forelse($cartItems as $shopId => $items)
+            <div class="shop-name">
+                {{ $items->first()->product->shop->shop_name ?? 'Unknown Shop' }}
+                @if(isset($selectedShipping[$shopId]))
+                    <span style="font-weight: normal; font-size: 0.9em; color: #555;">
+                        — Shipping: {{ $selectedShipping[$shopId] }}
+                    </span>
+                @endif
             </div>
-            <div style="margin-left: auto;">
-                <strong>1 x Rp9.449</strong>
-            </div>
-        </div>
-
-        <div class="border-box" style="background-color: #ffffff;">
-            <div class="dropdown">
-                <a href="#" class="dropdown-toggle">More</a>
-                <div class="dropdown-menu">
-                    <a href="#">Plant Cart</a>
-                    <a href="#">Seeds</a>
-                    <a href="#">Campaign</a>
-                    <a href="#">Marketplace</a>
+            @foreach($items as $item)
+                @php
+                    $totalmaximum_price += $item->total_price
+                @endphp
+                <div class="item">
+                    <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image" class="product-image"
+                        width="50" height="50">
+                    <div class='product-details-container'>
+                        <span class="product-name">{{ $item->product->name }}</span><br>
+                        <span class="product-description">{{ $item->product->description }}</span>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <strong>{{ $item->quantity }} x Rp{{ number_format($item->product->price, 0, ',', '.') }}</strong>
+                    </div>
                 </div>
+            @endforeach
+            <div class="shop-total-price">
+                <strong>Rp{{ number_format($item->total_price, 0, ',', '.') }}</strong>
             </div>
-            </nav>
+            <div class="dropdown" style="position: relative; margin-top: 10px;">
+                <a href="#" wire:click.prevent="toggleDropdown({{ $shopId }})" class="dropdown-toggle"
+                    style="cursor: pointer;">
+                    Shipping Options
+                </a>
+
+                @if(in_array($shopId, $openDropdowns))
+                    <div class="dropdown-menu"
+                        style="display: block; position: absolute; background-color: #f9f9f9; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); border-radius: 4px; z-index: 100;">
+                        <a href="#" wire:click.prevent="selectShipping({{ $shopId }}, 'Standard')">Standard Shipping</a>
+                        <a href="#" wire:click.prevent="selectShipping({{ $shopId }}, 'Express')">Express Shipping</a>
+                        <a href="#" wire:click.prevent="selectShipping({{ $shopId }}, 'Same Day')">Same Day Delivery</a>
+                    </div>
+                @endif
+            </div>
+
+            <hr class="dropdown-separator" />
+
+        @empty
+            <div class="empty-item">
+                <span>No Items in Cart</span>
+            </div>
+        @endforelse
+        <div class="total-cart-price">
+            <p>Total Price: Rp{{ number_format($totalmaximum_price, 0, ',', '.') }}</p>
         </div>
+    </div>
+    <div>
+        <button class="payment-button" onclick="window.location='{{ route('dashboard') }}'">Make Payment</button>
     </div>
 </div>

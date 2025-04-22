@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Eco-Seed</title>
@@ -7,7 +8,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
 
     <!-- CSS -->
     <style>
@@ -68,32 +70,36 @@
             padding: 30px;
         }
     </style>
+    @livewireStyles
 </head>
+
 <body>
 
     <header class="navbar">
-        <a href="{{ route('dashboard') }}" style="text-decoration: none; color: black;"><h2>Eco-Seed</h2>
+        <a href="{{ route('dashboard') }}" style="text-decoration: none; color: black;">
+            <h2>Eco-Seed</h2>
 
-        <nav>
-            <a href="{{ route('donate.form') }}">Donate</a>
-            <a href="{{ route('articles.index') }}">News</a>
-            <a href="#">Merch</a>
-            <a href="#">Plant Cart</a>
-            <a href="#">Seeds</a>
-            <a href="#">Campaign</a>
-            <a href="#">Marketplace</a>
-        </nav>
+            <nav>
+                <a href="{{ route('donate.form') }}">Donate</a>
+                <a href="{{ route('articles.index') }}">News</a>
+                <a href="#">Merch</a>
+                <a href="#">Plant Cart</a>
+                <a href="#">Seeds</a>
+                <a href="#">Campaign</a>
+                <a href="#">Marketplace</a>
+            </nav>
 
-        <div class="icons">
-            <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="Notifications">
-            <img src="{{ asset('images/settings-24px 1.svg') }}" alt="Settings">
-            <img src="{{ asset('images/Ellipse 14.png') }}" alt="Profile">
-        </div>
+            <div class="icons">
+                <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="Notifications">
+                <img src="{{ asset('images/settings-24px 1.svg') }}" alt="Settings">
+                <img src="{{ asset('images/Ellipse 14.png') }}" alt="Profile">
+            </div>
     </header>
 
     <main class="container">
         @yield('content')
     </main>
-
+    @livewireScripts
 </body>
+
 </html>
