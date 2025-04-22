@@ -7,7 +7,7 @@ use App\Models\Cart;
 
 class DisplayCart extends Component
 {
-    public $product_name, $quantity, $price;
+    public $product_name, $price, $quantity;
     public $cartItems = [];
 
     public function mount()
@@ -15,9 +15,13 @@ class DisplayCart extends Component
         $this->loadCart();
     }
 
+
     public function loadCart()
     {
-        $this->cartItems = Cart::all();
+        $this->cartItems = Cart::all()->map(function ($item) {
+            $item->total_price = $item->price * $item->quantity;
+            return $item;
+        });
     }
 
     public function addToCart()
@@ -38,10 +42,32 @@ class DisplayCart extends Component
         $this->loadCart();
     }
 
+    public function deleteFromCart($itemId)
+    {
+        $this->cartItems = $this->cartItems->filter(function ($item) use ($itemId) {
+            return $item->id !== $itemId;
+        });
+    }
+    public function addQuantity($itemId)
+    {
+        $item = Cart::find($itemId);
+        $item->quantity++;
+        $item->save();
+        $this->loadCart();
+    }
+
+    public function removeQuantity($itemId)
+    {
+        $item = Cart::find($itemId);
+        if ($item->quantity > 1) {
+            $item->quantity--;
+            $item->save();
+        }
+        $this->loadCart();
+    }
     public function render()
     {
         return view('livewire.display-cart')
             ->layout('components.layouts.app', ['title' => 'Cart Page']);
     }
-
 }
