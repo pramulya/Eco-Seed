@@ -3,20 +3,17 @@
 @endpush
 
 <div id="app">
-    @php
-        $totalmaximum_price = 0
-    @endphp
     <header class="navbar">
         <a href="{{ route('cart') }}">
             <h2>Back</h2>
         </a>
-        <nav>
-        </nav>
+        <nav></nav>
         <div class="icons">
             <img src="images/settings-24px 1.svg" alt="">
             <img src="images/Ellipse 14.png" alt="">
         </div>
     </header>
+
     <div class="border-box">
         <livewire:shipping-address />
     </div>
@@ -31,10 +28,8 @@
                     </span>
                 @endif
             </div>
+
             @foreach($items as $item)
-                @php
-                    $totalmaximum_price += $item->total_price
-                @endphp
                 <div class="item">
                     <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image" class="product-image"
                         width="50" height="50">
@@ -47,9 +42,12 @@
                     </div>
                 </div>
             @endforeach
+
             <div class="shop-total-price">
-                <strong>Rp{{ number_format($item->total_price, 0, ',', '.') }}</strong>
+                <strong>Rp{{ number_format($shopTotals[$shopId] ?? 0, 0, ',', '.') }}</strong>
             </div>
+
+            <!-- Shipping Options Dropdown -->
             <div class="dropdown" style="position: relative; margin-top: 10px;">
                 <a href="#" wire:click.prevent="toggleDropdown({{ $shopId }})" class="dropdown-toggle"
                     style="cursor: pointer;">
@@ -67,17 +65,20 @@
             </div>
 
             <hr class="dropdown-separator" />
-
         @empty
             <div class="empty-item">
                 <span>No Items in Cart</span>
             </div>
         @endforelse
-        <div class="total-cart-price">
-            <p>Total Price: Rp{{ number_format($totalmaximum_price, 0, ',', '.') }}</p>
+
+
+        <div class="total-cart-price" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">
+            <p>Total Price: Rp{{ number_format($totalMaximumPrice, 0, ',', '.') }}</p>
         </div>
+
     </div>
-    <div>
+
+    <div style="margin-top: 20px;">
         <button class="payment-button" onclick="window.location='{{ route('dashboard') }}'">Make Payment</button>
     </div>
 </div>

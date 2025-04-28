@@ -46,12 +46,15 @@ class DisplayCart extends Component
         $this->loadCart();
     }
 
-    public function deleteFromCart($itemId)
+    public function deleteFromCart($cartId)
     {
-        $this->cartItems = $this->cartItems->filter(function ($item) use ($itemId) {
-            return $item->id !== $itemId;
-        });
+        $item = Cart::find($cartId);
+        if ($item) {
+            $item->delete();
+            $this->loadCart();
+        }
     }
+
     public function addQuantity($itemId)
     {
         $item = Cart::find($itemId);
