@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Campaign;
 use App\Http\Controllers\Controller;
 use App\Models\Campaign;
+use App\Models\Donation;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -106,15 +107,51 @@ class CampaignController extends Controller
         return redirect()->route('campaign.index')->with('success', 'Campaign deleted successfully!');
     }
 
-    public function joinVolunteer(Request $request)
+    public function showVolunteerForm(Campaign $campaign)
     {
-        // Add volunteer functionality here
-        return redirect()->back()->with('success', 'Successfully joined as volunteer!');
+        return view('campaign.volunteer', compact('campaign'));
     }
 
-    public function donate(Request $request)
+    public function joinVolunteer(Request $request)
     {
-        // Add donation functionality here
-        return redirect()->back()->with('success', 'Donation successful!');
+        $validated = $request->validate([
+            'campaign_id' => 'required|exists:campaigns,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'motivation' => 'required|string',
+            'availability' => 'required|string',
+            'skills' => 'required|string'
+        ]);
+    
+        Volunteer::create($validated);
+    
+        return redirect()->route('campaign.show', $request->campaign_id)
+            ->with('success', 'Thank you for volunteering! We will contact you soon.');
+    }
+    
+    public function volunteers(Campaign $campaign)
+    {
+        $volunteers = $campaign->volunteers()->orderBy('created_at', 'desc')->get();
+        return view('campaign.volunteers', compact('campaign', 'volunteers'));
+    }
+
+    public function showDonationForm(Campaign $campaign)
+    {
+        return view('campaign.donate', compact('campaign'));
+    }
+
+    public function processDonation(Request $request)
+    {
+        $validated = $request->validate([
+            'campaign_id' => 'required|exists:campaigns,id',
+            'donor_name' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:1',
+            'email' => 'required|email',
+            'message' => 'nullable|string'
+        ]);
+    
+        Donation::create($validated);
+        return redirect()->back()->with('success', 'Thank you for your donation!');
     }
 }

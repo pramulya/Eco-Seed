@@ -179,14 +179,16 @@
                     <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($campaign->campaign_end_date)->format('M d, Y') }}</p>
                 </div>
                 <div class="campaign-actions">
-                    <a href="{{ route('campaign.edit', $campaign->id) }}" class="btn btn-edit">Edit</a>
-                    <form action="{{ route('campaign.destroy', $campaign->id) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
+                    <div class="action-row">
+                        <a href="{{ route('campaign.edit', $campaign->id) }}" class="btn btn-edit">Edit</a>
+                        <form action="{{ route('campaign.destroy', $campaign->id) }}" method="POST" style="flex: 1;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-delete" style="width: 100%;">Delete</button>
+                        </form>
+                    </div>
+                    <a href="{{ route('campaign.donate', $campaign->id) }}" class="btn btn-donate">Donate Now</a>
                 </div>
-                <a href="{{ route('donate.form', ['campaign_id' => $campaign->id]) }}" class="btn btn-donate">Donate Now</a>
             </div>
             @endforeach
         </div>

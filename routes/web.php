@@ -7,16 +7,20 @@ use App\Livewire\DisplayCart;
 use App\Http\Controllers\Campaign\CampaignController;
 
 Route::get('/', function () {
-  return view('welcome');
+    return view('welcome');
 });
 
 Route::get('/donate', [DonationController::class, 'showForm'])->name('donate.form');
 Route::post('/donate', [DonationController::class, 'submitDonation'])->name('donate.submit');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/cart', DisplayCart::class);
-Route::resource('campaign', CampaignController::class);
-Route::get('/campaigns', [CampaignController::class, 'index']);
-Route::get('/campaigns/{id}', [CampaignController::class, 'show']);
 
-Route::post('/campaigns/volunteer', [CampaignController::class, 'joinVolunteer'])->name('campaigns.volunteer');
-Route::post('/campaigns/donate', [CampaignController::class, 'donate'])->name('campaigns.donate');
+// Simplified campaign routes
+Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
+Route::get('/campaign/create', [CampaignController::class, 'create'])->name('campaign.create');
+Route::post('/campaign', [CampaignController::class, 'store'])->name('campaign.store');
+Route::get('/campaign/{campaign}/edit', [CampaignController::class, 'edit'])->name('campaign.edit');
+Route::put('/campaign/{campaign}', [CampaignController::class, 'update'])->name('campaign.update');
+Route::delete('/campaign/{campaign}', [CampaignController::class, 'destroy'])->name('campaign.destroy');
+Route::get('/campaign/{campaign}/donate', [CampaignController::class, 'showDonationForm'])->name('campaign.donate');
+Route::post('/campaign/donate', [CampaignController::class, 'processDonation'])->name('campaign.process-donation');

@@ -18,4 +18,9 @@ class Campaign extends Model
         'image_path',
         'year'
     ];
+
+    public function volunteers()
+    {
+        return $this->hasMany(Volunteer::class);
+    }
 }
