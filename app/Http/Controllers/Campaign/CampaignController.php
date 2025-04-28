@@ -124,7 +124,6 @@ class CampaignController extends Controller
             'skills' => 'required|string'
         ]);
     
-        Volunteer::create($validated);
     
         return redirect()->route('campaign.show', $request->campaign_id)
             ->with('success', 'Thank you for volunteering! We will contact you soon.');

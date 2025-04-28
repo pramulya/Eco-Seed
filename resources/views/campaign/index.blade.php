@@ -163,8 +163,8 @@
 
     <div class="container">
         <div class="header-section">
-            <h2>Our Campaigns</h2>
-            <a href="{{ route('campaign.create') }}" class="create-button">Create Campaign</a>
+            <h2>Active Campaigns</h2>
+            <a href="{{ route('campaign.create') }}" class="create-button" onclick="return confirm('Are you sure you want to Create a new Campaign?');">Create your own Campaign</a>
         </div>
 
         <div class="campaign-grid">
@@ -180,14 +180,14 @@
                 </div>
                 <div class="campaign-actions">
                     <div class="action-row">
-                        <a href="{{ route('campaign.edit', $campaign->id) }}" class="btn btn-edit">Edit</a>
-                        <form action="{{ route('campaign.destroy', $campaign->id) }}" method="POST" style="flex: 1;">
+                        <a href="{{ route('campaign.edit', $campaign->id) }}" class="btn btn-edit" onclick="return confirm('Are you sure you want to Edit this Campaign?');">Edit</a>
+                        <form action="{{ route('campaign.destroy', $campaign->id) }}" method="POST" style="flex: 1;" onsubmit="return confirm('Are you sure you want to delete this campaign?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-delete" style="width: 100%;">Delete</button>
                         </form>
                     </div>
-                    <a href="{{ route('campaign.donate', $campaign->id) }}" class="btn btn-donate">Donate Now</a>
+                    <a href="{{ route('donate.form') }}" class="btn btn-donate">Donate Now</a>
                 </div>
             </div>
             @endforeach

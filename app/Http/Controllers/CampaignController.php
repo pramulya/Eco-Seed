@@ -29,8 +29,6 @@ class CampaignController extends Controller
             'email' => 'required|email',
         ]);
 
-        Volunteer::create($request->all());
-
         return redirect()->back()->with('success', 'Thanks for joining as a volunteer!');
     }
 
