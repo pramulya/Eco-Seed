@@ -58,10 +58,21 @@ class DisplayCart extends Component
     public function addQuantity($itemId)
     {
         $item = Cart::find($itemId);
-        $item->quantity++;
-        $item->save();
-        $this->loadCart();
+        if (!$item) {
+            return;
+        }
+
+        $product = $item->product;
+
+        if ($item->quantity < $product->stock) {
+            $item->quantity++;
+            $item->save();
+            $this->loadCart();
+        } else {
+            $this->dispatchBrowserEvent('stock-limit', ['message' => 'Quantity cannot exceed available stock']);
+        }
     }
+
 
     public function removeQuantity($itemId)
     {

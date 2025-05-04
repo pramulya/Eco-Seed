@@ -50,9 +50,16 @@
                                             <img src="{{ asset('images/recycle-bin.png') }}" alt="Delete" class="trash-icon">
                                         </button>
                                         <div class="quantity-control">
-                                            <button wire:click="removeQuantity({{ $item->cartId }})">-</button>
+                                            <button dusk="remove-quantity-button-{{ $item->cartId }}" class="btn-decrease-quantity"
+                                                wire:click="removeQuantity({{ $item->cartId }})" @if($item->quantity <= 1) disabled
+                                                @endif>
+                                                -
+                                            </button>
                                             <input type="text" value="{{ $item->quantity }}" readonly>
-                                            <button wire:click="addQuantity({{ $item->cartId }})">+</button>
+                                            <button dusk="add-quantity-button-{{ $item->cartId }}" class="btn-increase-quantity"
+                                                wire:click="addQuantity({{ $item->cartId }})" @if($item->quantity >= $item->product->stock) disabled @endif>
+                                                +
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

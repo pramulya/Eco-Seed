@@ -6,35 +6,34 @@ use Livewire\Component;
 
 class ShippingAddress extends Component
 {
-    public $street = '';
-    public $city = '';
-    public $postal = '';
-    public $notes = '';
-    public $saved = false;
+  public $street = '';
+  public $city = '';
+  public $postal = '';
+  public $notes = '';
+  public $saved = false;
 
-    protected $rules = [
-        'street' => 'required|string|max:255',
-        'city' => 'required|string|max:255',
-        'postal' => 'required|string|max:20',
-        'notes' => 'nullable|string|max:500',
-    ];
+  protected $rules = [
+    'street' => 'required|string|max:255',
+    'city' => 'required|string|max:255',
+    'postal' => 'required|string|max:20',
+    'notes' => 'nullable|string|max:500',
+  ];
 
-    public function save()
-    {
-        $this->validate();
+  public function save()
+  {
+    $this->validate();
 
-        // Optionally save to database here
+    // Optionally save to database here
 
-        $this->saved = true;
-    }
+    $this->saved = true;
+  }
+  public function edit()
+  {
+    $this->saved = false;
+  }
 
-    public function edit()
-    {
-        $this->saved = false;
-    }
-
-    public function render()
-    {
-        return view('livewire.shipping-address');
-    }
+  public function render()
+  {
+    return view('livewire.shipping-address');
+  }
 }
