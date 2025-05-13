@@ -13,6 +13,12 @@ class Checkout extends Component
     public $shopTotals = [];
     public $totalMaximumPrice = 0;
 
+    public $shopCities = [];
+    public $shippingAddressCity = null;
+    public $estimatedDeliveryDays = [];
+
+    protected $listeners = ['shippingAddressUpdated' => 'updateShippingCity'];
+
     public function mount()
     {
         $this->loadCheckout();
@@ -28,6 +34,11 @@ class Checkout extends Component
                     return $item;
                 });
             });
+
+        // Load shop cities
+        foreach ($this->cartItems as $shopId => $items) {
+            $this->shopCities[$shopId] = $items->first()->product->shop->shop_city ?? null;
+        }
 
         $this->calculateTotals();
     }
@@ -58,8 +69,51 @@ class Checkout extends Component
         $this->selectedShipping[$shopId] = $option;
         $this->openDropdowns = array_filter($this->openDropdowns, fn($id) => $id !== $shopId);
 
+        $shopCity = $this->shopCities[$shopId] ?? null;
+        $shippingCity = $this->shippingAddressCity;
+
+        $this->estimatedDeliveryDays[$shopId] = $this->calculateEstimatedDays($shopCity, $shippingCity, $option);
     }
 
+    public function updateShippingCity($city)
+    {
+        $this->shippingAddressCity = $city;
+
+        // Recalculate estimates for all selected shipping options
+        foreach ($this->selectedShipping as $shopId => $method) {
+            $shopCity = $this->shopCities[$shopId] ?? null;
+            $this->estimatedDeliveryDays[$shopId] = $this->calculateEstimatedDays($shopCity, $city, $method);
+        }
+    }
+
+    public function calculateEstimatedDays($shopCity, $shippingCity, $shippingMethod)
+    {
+        if (!$shopCity || !$shippingCity) {
+            return null;
+        }
+
+        if ($shopCity === $shippingCity) {
+            switch ($shippingMethod) {
+                case 'Same Day':
+                    return 0;
+                case 'Express':
+                    return 1;
+                case 'Standard':
+                default:
+                    return 2;
+            }
+        } else {
+            switch ($shippingMethod) {
+                case 'Same Day':
+                    return 1;
+                case 'Express':
+                    return 2;
+                case 'Standard':
+                default:
+                    return 4;
+            }
+        }
+    }
 
     public function render()
     {

@@ -19,6 +19,11 @@ class ShippingAddress extends Component
     'notes' => 'nullable|string|max:500',
   ];
 
+  public function updatedCity()
+  {
+    $this->emit('shippingAddressUpdated', $this->city);
+  }
+
   public function save()
   {
     $this->validate();
@@ -26,7 +31,10 @@ class ShippingAddress extends Component
     // Optionally save to database here
 
     $this->saved = true;
+
+    $this->emit('shippingAddressUpdated', $this->city);
   }
+
   public function edit()
   {
     $this->saved = false;

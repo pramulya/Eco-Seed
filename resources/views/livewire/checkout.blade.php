@@ -30,17 +30,7 @@
             </div>
 
             @foreach($items as $item)
-                <div class="item">
-                    <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image" class="product-image"
-                        width="50" height="50">
-                    <div class='product-details-container'>
-                        <span class="product-name">{{ $item->product->name }}</span><br>
-                        <span class="product-description">{{ $item->product->description }}</span>
-                    </div>
-                    <div style="margin-left: auto;">
-                        <strong>{{ $item->quantity }} x Rp{{ number_format($item->product->price, 0, ',', '.') }}</strong>
-                    </div>
-                </div>
+                <!-- product item display -->
             @endforeach
 
             <div class="shop-total-price">
@@ -64,12 +54,25 @@
                 @endif
             </div>
 
+            <!-- Estimated Delivery Days Display -->
+            @if(isset($estimatedDeliveryDays[$shopId]))
+                <div class="estimated-delivery" style="margin-top: 5px; font-style: italic; color: #555;">
+                    Estimated Delivery:
+                    @if($estimatedDeliveryDays[$shopId] === 0)
+                        Same day
+                    @else
+                        {{ $estimatedDeliveryDays[$shopId] }} day(s)
+                    @endif
+                </div>
+            @endif
+
             <hr class="dropdown-separator" />
         @empty
             <div class="empty-item">
                 <span>No Items in Cart</span>
             </div>
         @endforelse
+
 
 
         <div class="total-cart-price" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">
