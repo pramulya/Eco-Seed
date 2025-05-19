@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Eco-Seed | Make a Donation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
@@ -148,27 +150,35 @@
         });
     </script>
 </head>
+
 <body>
 
     <!-- 🌿 Navbar -->
     <header class="navbar">
-        <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
+        <a href="{{ route('dashboard') }}">
+            <h2>Eco-Seed</h2>
+        </a>
         <nav>
-        <nav>
-            <a href="{{ route('donate.form') }}">Donate</a>
-        <a href="#">News</a>
-        <a href="#">Merch</a>
-        <a href="#">Plant Cart</a>
-        <a href="#">Seeds</a>
-        <a href="#">Campaign</a>
-        <a href="#">Marketplace</a>
-</nav>
+            <nav>
+                <a href="{{ route('donate.form') }}">Donate</a>
+                <a href="#">News</a>
+                <a href="#">Merch</a>
+                <a href="#">Plant Cart</a>
+                <a href="#">Seeds</a>
+                <a href="#">Campaign</a>
+                <a href="#">Marketplace</a>
+            </nav>
 
         </nav>
         <div class="icons">
             <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="Notifications">
             <img src="{{ asset('images/settings-24px 1.svg') }}" alt="Settings">
-            <img src="{{ asset('images/Ellipse 14.png') }}" alt="Profile">
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="images/Ellipse 14.png" alt="Logout" />
+                </button>
+            </form>
         </div>
     </header>
 
@@ -231,4 +241,5 @@
     </form>
 
 </body>
+
 </html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Donation History | Eco-Seed</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
@@ -76,7 +78,8 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
@@ -88,10 +91,13 @@
         }
     </style>
 </head>
+
 <body>
 
     <header class="navbar">
-        <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
+        <a href="{{ route('dashboard') }}">
+            <h2>Eco-Seed</h2>
+        </a>
         <nav>
             <a href="{{ route('donate.form') }}">Donate</a>
             <a href="{{ route('articles.index') }}">News</a>
@@ -104,7 +110,12 @@
         <div class="icons">
             <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="Notifications">
             <img src="{{ asset('images/settings-24px 1.svg') }}" alt="Settings">
-            <img src="{{ asset('images/Ellipse 14.png') }}" alt="Profile">
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="images/Ellipse 14.png" alt="Logout" />
+                </button>
+            </form>
         </div>
     </header>
 
@@ -117,7 +128,7 @@
                     alert("{{ session('success') }}");
                 @endif
             });
-</script>
+        </script>
 
 
         <table>
@@ -151,4 +162,5 @@
     </div>
 
 </body>
+
 </html>

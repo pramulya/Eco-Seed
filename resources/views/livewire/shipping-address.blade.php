@@ -1,6 +1,6 @@
 <div class="shipping-address-form border-box">
     <div class="header">
-        <h3 class="icon">📍</>Shipping Address
+        <h3 class="icon">📍</h3> Shipping Address
     </div>
 
     @if(!$saved)
@@ -9,7 +9,7 @@
             <input type="text" id="street" wire:model.defer="street" placeholder="Enter street address" required>
 
             <label for="city">City</label>
-            <input type="text" id="city" wire:model.defer="city" placeholder="Enter city" required>
+            <input type="text" id="city" wire:model.lazy="city" placeholder="Enter city" required>
 
             <label for="postal">Postal Code</label>
             <input type="text" id="postal" wire:model.defer="postal" placeholder="Enter postal code" required>

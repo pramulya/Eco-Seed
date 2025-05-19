@@ -18,5 +18,3 @@ class Cart extends Model
     }
 }
 
-    protected $fillable = ['product_name', 'quantity', 'price'];
-}
