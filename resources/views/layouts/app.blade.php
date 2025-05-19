@@ -68,6 +68,7 @@
             padding: 30px;
         }
     </style>
+    @stack('styles')
 </head>
 <body>
 
