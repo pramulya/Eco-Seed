@@ -19,4 +19,8 @@ class Campaign extends Model
         'year'
     ];
 
+    public function volunteers()
+    {
+        return $this->hasMany(Volunteer::class);
+    }
 }

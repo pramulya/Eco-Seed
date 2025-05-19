@@ -24,6 +24,7 @@ class DonationController extends Controller
             'card_cvc' => 'nullable|required_if:payment_method,card',
         ]);
 
+        // Store into database
         Donation::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -39,5 +40,7 @@ class DonationController extends Controller
     {
         $donations = Donation::orderBy('created_at', 'desc')->get(); 
         return view('donation-history', compact('donations'));
+        // Redirect back with success message
+        return redirect()->route('donate.form')->with('success', 'Payment successful! Thank you for your donation.');
     }
 }

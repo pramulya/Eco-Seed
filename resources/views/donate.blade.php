@@ -14,6 +14,10 @@
             background: #f9f9f9;
         }
 
+<<<<<<< HEAD
+=======
+        /* Navbar Styles */
+>>>>>>> Surya_Branch
         .navbar {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -51,11 +55,19 @@
             gap: 30px;
         }
 
+<<<<<<< HEAD
 
+=======
+        /* Donation Form Styles */
+>>>>>>> Surya_Branch
         header img.tree-header {
             width: 60%;
             max-height: 500px;
             object-fit: cover;
+<<<<<<< HEAD
+=======
+            border-bottom: 4px solid #00a300;
+>>>>>>> Surya_Branch
             margin-left: 20%;
             margin-top: 20px;
         }
@@ -139,7 +151,11 @@
         document.addEventListener('DOMContentLoaded', function () {
             toggleCardFields();
 
+<<<<<<< HEAD
 
+=======
+            // Show popup if payment was successful
+>>>>>>> Surya_Branch
             @if(session('success'))
                 alert("{{ session('success') }}");
             @endif
@@ -148,13 +164,22 @@
 </head>
 <body>
 
+<<<<<<< HEAD
 
+=======
+    <!-- 🌿 Navbar -->
+>>>>>>> Surya_Branch
     <header class="navbar">
         <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
         <nav>
         <nav>
+<<<<<<< HEAD
         <a href="{{ route('donate.form') }}">Donate</a>
         <a href="{{ route('articles.index') }}">News</a>
+=======
+            <a href="{{ route('donate.form') }}">Donate</a>
+        <a href="#">News</a>
+>>>>>>> Surya_Branch
         <a href="#">Merch</a>
         <a href="#">Plant Cart</a>
         <a href="#">Seeds</a>
@@ -170,15 +195,27 @@
         </div>
     </header>
 
+<<<<<<< HEAD
 
+=======
+    <!-- 🌳 Tree Image -->
+>>>>>>> Surya_Branch
     <header>
         <img src="{{ asset('images/Big Tree Image.jpg') }}" alt="Big tree image" class="tree-header">
     </header>
 
+<<<<<<< HEAD
 
     <form action="{{ route('donate.submit') }}" method="POST">
         @csrf
         <div class="container">
+=======
+    <!-- 💳 Donation Form -->
+    <form action="{{ route('donate.submit') }}" method="POST">
+        @csrf
+        <div class="container">
+            <!-- Left Side: Donation Amount -->
+>>>>>>> Surya_Branch
             <div class="section">
                 <h2>Choose donation amount</h2>
                 <label for="amount">Donate</label><br>
@@ -189,6 +226,10 @@
                 <small>Slide the button to your desired amount of donation</small>
             </div>
 
+<<<<<<< HEAD
+=======
+            <!-- Right Side: Personal Info -->
+>>>>>>> Surya_Branch
             <div class="section">
                 <h2>Personal Information</h2>
 
@@ -206,6 +247,10 @@
                     <option value="apple_pay">Apple Pay</option>
                 </select>
 
+<<<<<<< HEAD
+=======
+                <!-- Card fields (conditionally shown) -->
+>>>>>>> Surya_Branch
                 <div id="cardFields">
                     <label>Card Number</label>
                     <input type="text" name="card_number" placeholder="1234 5678 9012 3456">
@@ -219,7 +264,11 @@
             </div>
         </div>
 
+<<<<<<< HEAD
 
+=======
+        <!-- Submit Button -->
+>>>>>>> Surya_Branch
         <div class="continue-button">
             <button type="submit">Make Payment</button>
         </div>

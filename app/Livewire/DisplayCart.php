@@ -9,6 +9,10 @@ use App\Models\Product;
 class DisplayCart extends Component
 {
     public $product_id, $user_id, $quantity, $total_price;
+
+class DisplayCart extends Component
+{
+    public $product_name, $quantity, $price;
     public $cartItems = [];
 
     public function mount()
@@ -16,6 +20,7 @@ class DisplayCart extends Component
         $this->loadCart();
     }
 
+<<<<<<< HEAD
 
     public function loadCart()
     {
@@ -25,11 +30,17 @@ class DisplayCart extends Component
                 return $item;
             });
         });
+=======
+    public function loadCart()
+    {
+        $this->cartItems = Cart::all();
+>>>>>>> Surya_Branch
     }
 
     public function addToCart()
     {
         $this->validate([
+<<<<<<< HEAD
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
         ]);
@@ -72,6 +83,23 @@ class DisplayCart extends Component
         }
         $this->loadCart();
     }
+=======
+            'product_name' => 'required',
+            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0'
+        ]);
+
+        Cart::create([
+            'product_name' => $this->product_name,
+            'quantity' => $this->quantity,
+            'price' => $this->price,
+        ]);
+
+        $this->reset(['product_name', 'quantity', 'price']);
+        $this->loadCart();
+    }
+
+>>>>>>> Surya_Branch
     public function render()
     {
         return view('livewire.display-cart')

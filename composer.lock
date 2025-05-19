@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "d8d123b3c4b6824356becc25227f231d",
+=======
+    "content-hash": "65e2e8c55762845276d7f3cce3093a7b",
+>>>>>>> Surya_Branch
     "packages": [
         {
             "name": "brick/math",
@@ -1056,6 +1060,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v12.9.2",
             "source": {
                 "type": "git",
@@ -1066,6 +1071,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/3db59aa0f382c349c78a92f3e5b5522e00e3301b",
                 "reference": "3db59aa0f382c349c78a92f3e5b5522e00e3301b",
+=======
+            "version": "v12.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "d1ea3566f6e0cad34834c6d18db0bf995438eb87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d1ea3566f6e0cad34834c6d18db0bf995438eb87",
+                "reference": "d1ea3566f6e0cad34834c6d18db0bf995438eb87",
+>>>>>>> Surya_Branch
                 "shasum": ""
             },
             "require": {
@@ -1174,7 +1191,11 @@
                 "league/flysystem-sftp-v3": "^3.25.1",
                 "mockery/mockery": "^1.6.10",
                 "orchestra/testbench-core": "^10.0.0",
+<<<<<<< HEAD
                 "pda/pheanstalk": "^5.0.6|^7.0.0",
+=======
+                "pda/pheanstalk": "^5.0.6",
+>>>>>>> Surya_Branch
                 "php-http/discovery": "^1.15",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^10.5.35|^11.5.3|^12.0.1",
@@ -1267,7 +1288,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
             "time": "2025-04-16T15:44:19+00:00"
+=======
+            "time": "2025-04-08T19:58:59+00:00"
+>>>>>>> Surya_Branch
         },
         {
             "name": "laravel/prompts",
@@ -1457,6 +1482,7 @@
         },
         {
             "name": "league/commonmark",
+<<<<<<< HEAD
             "version": "2.6.2",
             "source": {
                 "type": "git",
@@ -1467,6 +1493,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/06c3b0bf2540338094575612f4a1778d0d2d5e94",
                 "reference": "06c3b0bf2540338094575612f4a1778d0d2d5e94",
+=======
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/commonmark.git",
+                "reference": "d990688c91cedfb69753ffc2512727ec646df2ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d990688c91cedfb69753ffc2512727ec646df2ad",
+                "reference": "d990688c91cedfb69753ffc2512727ec646df2ad",
+>>>>>>> Surya_Branch
                 "shasum": ""
             },
             "require": {
@@ -1560,7 +1598,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2025-04-18T21:09:27+00:00"
+=======
+            "time": "2024-12-29T14:10:59+00:00"
+>>>>>>> Surya_Branch
         },
         {
             "name": "league/config",
@@ -2008,6 +2050,7 @@
         },
         {
             "name": "livewire/livewire",
+<<<<<<< HEAD
             "version": "v3.6.3",
             "source": {
                 "type": "git",
@@ -2018,6 +2061,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/livewire/livewire/zipball/56aa1bb63a46e06181c56fa64717a7287e19115e",
                 "reference": "56aa1bb63a46e06181c56fa64717a7287e19115e",
+=======
+            "version": "v3.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "8f8914731f5eb43b6bb145d87c8d5a9edfc89313"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/8f8914731f5eb43b6bb145d87c8d5a9edfc89313",
+                "reference": "8f8914731f5eb43b6bb145d87c8d5a9edfc89313",
+>>>>>>> Surya_Branch
                 "shasum": ""
             },
             "require": {
@@ -2072,7 +2127,11 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/livewire/livewire/tree/v3.6.3"
+=======
+                "source": "https://github.com/livewire/livewire/tree/v3.6.2"
+>>>>>>> Surya_Branch
             },
             "funding": [
                 {
@@ -2080,7 +2139,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2025-04-12T22:26:52+00:00"
+=======
+            "time": "2025-03-12T20:24:15+00:00"
+>>>>>>> Surya_Branch
         },
         {
             "name": "monolog/monolog",
@@ -6049,6 +6112,7 @@
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laravel/dusk",
             "version": "v8.3.2",
             "source": {
@@ -6123,6 +6187,8 @@
             "time": "2025-02-20T14:42:00+00:00"
         },
         {
+=======
+>>>>>>> Surya_Branch
             "name": "laravel/pail",
             "version": "v1.2.2",
             "source": {
@@ -6690,6 +6756,7 @@
             "time": "2022-02-21T01:04:05+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "php-webdriver/webdriver",
             "version": "1.15.2",
             "source": {
@@ -6756,6 +6823,8 @@
             "time": "2024-11-21T15:12:59+00:00"
         },
         {
+=======
+>>>>>>> Surya_Branch
             "name": "phpunit/php-code-coverage",
             "version": "11.0.9",
             "source": {
@@ -8282,16 +8351,25 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
+<<<<<<< HEAD
     "stability-flags": [],
+=======
+    "stability-flags": {},
+>>>>>>> Surya_Branch
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
+<<<<<<< HEAD
     "platform-dev": [],
 <<<<<<< Updated upstream
     "plugin-api-version": "2.3.0"
 =======
     "plugin-api-version": "2.6.0"
 >>>>>>> Stashed changes
+=======
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
+>>>>>>> Surya_Branch
 }
