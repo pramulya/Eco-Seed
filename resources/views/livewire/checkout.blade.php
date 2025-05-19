@@ -10,7 +10,12 @@
         <nav></nav>
         <div class="icons">
             <img src="images/settings-24px 1.svg" alt="">
-            <img src="images/Ellipse 14.png" alt="">
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="images/Ellipse 14.png" alt="Logout" />
+                </button>
+            </form>
         </div>
     </header>
 
@@ -30,7 +35,17 @@
             </div>
 
             @foreach($items as $item)
-                <!-- product item display -->
+                <div class="item">
+                    <img src="{{ asset('images/product-image_placeholder.png') }}" alt="Product Image" class="product-image"
+                        width="50" height="50">
+                    <div class='product-details-container'>
+                        <span class="product-name">{{ $item->product->name }}</span><br>
+                        <span class="product-description">{{ $item->product->description }}</span>
+                    </div>
+                    <div style="margin-left: auto;">
+                        <strong>{{ $item->quantity }} x Rp{{ number_format($item->product->price, 0, ',', '.') }}</strong>
+                    </div>
+                </div>
             @endforeach
 
             <div class="shop-total-price">
@@ -54,25 +69,12 @@
                 @endif
             </div>
 
-            <!-- Estimated Delivery Days Display -->
-            @if(isset($estimatedDeliveryDays[$shopId]))
-                <div class="estimated-delivery" style="margin-top: 5px; font-style: italic; color: #555;">
-                    Estimated Delivery:
-                    @if($estimatedDeliveryDays[$shopId] === 0)
-                        Same day
-                    @else
-                        {{ $estimatedDeliveryDays[$shopId] }} day(s)
-                    @endif
-                </div>
-            @endif
-
             <hr class="dropdown-separator" />
         @empty
             <div class="empty-item">
                 <span>No Items in Cart</span>
             </div>
         @endforelse
-
 
 
         <div class="total-cart-price" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;">

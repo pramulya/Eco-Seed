@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Eco-Seed | Make a Donation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
 
     <style>
         body {
@@ -14,6 +16,7 @@
             background: #f9f9f9;
         }
 
+        /* Navbar Styles */
         .navbar {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -51,11 +54,12 @@
             gap: 30px;
         }
 
-
+        /* Donation Form Styles */
         header img.tree-header {
             width: 60%;
             max-height: 500px;
             object-fit: cover;
+            border-bottom: 4px solid #00a300;
             margin-left: 20%;
             margin-top: 20px;
         }
@@ -139,46 +143,55 @@
         document.addEventListener('DOMContentLoaded', function () {
             toggleCardFields();
 
-
+            // Show popup if payment was successful
             @if(session('success'))
                 alert("{{ session('success') }}");
             @endif
         });
     </script>
 </head>
+
 <body>
 
-
+    <!-- 🌿 Navbar -->
     <header class="navbar">
-        <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
+        <a href="{{ route('dashboard') }}">
+            <h2>Eco-Seed</h2>
+        </a>
         <nav>
-        <nav>
-        <a href="{{ route('donate.form') }}">Donate</a>
-        <a href="{{ route('articles.index') }}">News</a>
-        <a href="#">Merch</a>
-        <a href="#">Plant Cart</a>
-        <a href="#">Seeds</a>
-        <a href="#">Campaign</a>
-        <a href="#">Marketplace</a>
-</nav>
+            <nav>
+                <a href="{{ route('donate.form') }}">Donate</a>
+                <a href="#">News</a>
+                <a href="#">Merch</a>
+                <a href="#">Plant Cart</a>
+                <a href="#">Seeds</a>
+                <a href="#">Campaign</a>
+                <a href="#">Marketplace</a>
+            </nav>
 
         </nav>
         <div class="icons">
             <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="Notifications">
             <img src="{{ asset('images/settings-24px 1.svg') }}" alt="Settings">
-            <img src="{{ asset('images/Ellipse 14.png') }}" alt="Profile">
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="images/Ellipse 14.png" alt="Logout" />
+                </button>
+            </form>
         </div>
     </header>
 
-
+    <!-- 🌳 Tree Image -->
     <header>
         <img src="{{ asset('images/Big Tree Image.jpg') }}" alt="Big tree image" class="tree-header">
     </header>
 
-
+    <!-- 💳 Donation Form -->
     <form action="{{ route('donate.submit') }}" method="POST">
         @csrf
         <div class="container">
+            <!-- Left Side: Donation Amount -->
             <div class="section">
                 <h2>Choose donation amount</h2>
                 <label for="amount">Donate</label><br>
@@ -189,6 +202,7 @@
                 <small>Slide the button to your desired amount of donation</small>
             </div>
 
+            <!-- Right Side: Personal Info -->
             <div class="section">
                 <h2>Personal Information</h2>
 
@@ -206,6 +220,7 @@
                     <option value="apple_pay">Apple Pay</option>
                 </select>
 
+                <!-- Card fields (conditionally shown) -->
                 <div id="cardFields">
                     <label>Card Number</label>
                     <input type="text" name="card_number" placeholder="1234 5678 9012 3456">
@@ -219,11 +234,12 @@
             </div>
         </div>
 
-
+        <!-- Submit Button -->
         <div class="continue-button">
             <button type="submit">Make Payment</button>
         </div>
     </form>
 
 </body>
+
 </html>

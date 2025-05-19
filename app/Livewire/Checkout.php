@@ -26,7 +26,11 @@ class Checkout extends Component
 
     public function loadCheckout()
     {
-        $this->cartItems = Cart::with('product.shop')->get()
+        $userId = auth()->id();
+
+        $this->cartItems = Cart::with('product.shop')
+            ->where('user_id', $userId) // Filter by logged-in user
+            ->get()
             ->groupBy('product.shop_id')
             ->map(function ($items) {
                 return $items->map(function ($item) {

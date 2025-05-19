@@ -27,6 +27,7 @@ class DisplayCart extends Component
         });
     }
 
+
     public function addToCart()
     {
         $this->validate([

@@ -84,7 +84,12 @@
         <div class="icons">
             <img src="images/notifications-24px 1.svg" alt="">
             <img src="images/settings-24px 1.svg" alt="">
-            <img src="images/Ellipse 14.png" alt="">
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="images/Ellipse 14.png" alt="Logout" />
+                </button>
+            </form>
         </div>
     </header>
     <main>
