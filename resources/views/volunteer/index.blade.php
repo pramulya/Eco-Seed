@@ -16,6 +16,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Availability</th>
+                                <th>Skills</th>
                                 <th>Joined Date</th>
                             </tr>
                         </thead>
@@ -26,6 +27,7 @@
                                     <td>{{ $volunteer->email }}</td>
                                     <td>{{ $volunteer->phone }}</td>
                                     <td>{{ $volunteer->availability }}</td>
+                                    <td>{{ $volunteer->skills }}</td>
                                     <td>{{ $volunteer->created_at->format('d M Y') }}</td>
                                 </tr>
                             @endforeach

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->text('campaign_description');
             $table->string('image_path')->nullable();
             $table->integer('year');
+            $table->decimal('current_amount', 10, 2)->default(0);
+            $table->integer('volunteer_count')->default(0);
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
