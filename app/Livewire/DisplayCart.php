@@ -7,7 +7,9 @@ use App\Models\Cart;
 
 class DisplayCart extends Component
 {
-    public $product_name, $quantity, $price;
+    public $product_name;
+    public $quantity;
+    public $price;
     public $cartItems = [];
 
     public function mount()
@@ -43,5 +45,4 @@ class DisplayCart extends Component
         return view('livewire.display-cart')
             ->layout('components.layouts.app', ['title' => 'Cart Page']);
     }
-
 }
