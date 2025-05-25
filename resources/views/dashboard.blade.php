@@ -1,108 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Eco-Seed | Make a Donation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-
-</head>
 <style>
-body {
-    margin: 0;
-    font-family: "Plus Jakarta Sans", sans-serif;
-}
+    body {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+    }
 
-.navbar {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    color: black;
-    align-items: center;
-    background-color: #95eb50;
-    padding: 5px 15px;
-}
+    .navbar {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        color: black;
+        align-items: center;
+        background-color: #95eb50;
+        padding: 5px 15px;
+    }
 
-a {
-    text-decoration: none;
-    color: black;
-}
+    a {
+        text-decoration: none;
+        color: black;
+    }
 
-nav {
-    display: inline-flex;
-    justify-content: center;
-    gap: 10px;
-}
+    nav {
+        display: inline-flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    }
 
-nav a {
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 20px 10px;
-}
+    nav a,
+    .dropdown > a {
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 10px;
+        padding: 20px 10px;
+        display: inline-block;
+    }
 
-nav a:hover {
-    background-color:rgb(87, 134, 48);
-    transition: 0.3s;
-}
+    nav a:hover,
+    .dropdown:hover > a {
+        background-color: rgb(87, 134, 48);
+        transition: 0.3s;
+    }
 
-nav .icons {
-    display: flex;
-    gap: 30px;
-}
+    .icons {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
 
-main .poster {
-    position: relative;
-    justify-self: center;
-    margin-top: 20px;
-}
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
 
-.poster button {
-    position: absolute;
-    bottom: 100px;
-    left: 265px;
-    width: 360px;
-    background-color: #EEFF6B;
-    border-radius: 15px;
-    border: none;
-    font-size: 2rem;
-    padding: 15px 20px;
-}
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        border-radius: 8px;
+        margin-top: 5px;
+    }
 
-.poster button:hover {
-    background-color:rgb(130, 145, 12);
-    transition: 0.3s;
-}
+    .dropdown-content a,
+    .profile-dropdown-content button {
+        color: black;
+        padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+    }
 
+    .dropdown-content a:hover,
+    .profile-dropdown-content button:hover {
+        background-color: #e5ffe5;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .profile-dropdown:hover .profile-dropdown-content {
+        display: block;
+    }
+
+    .profile-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-name {
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .profile-dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #fff;
+        min-width: 140px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        border-radius: 8px;
+        text-align: left;
+    }
+
+    main .poster {
+        position: relative;
+        justify-self: center;
+    }
+
+    .poster button {
+        position: absolute;
+        bottom: 100px;
+        left: 265px;
+        width: 360px;
+        background-color: #EEFF6B;
+        border-radius: 15px;
+        border: none;
+        font-size: 2rem;
+        padding: 15px 20px;
+    }
+
+    .poster button:hover {
+        background-color: rgb(130, 145, 12);
+        transition: 0.3s;
+    }
 </style>
 
 <body>
     <header class="navbar">
-        <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
+        <a href="{{ route('dashboard') }}">
+            <h2>Eco-Seed</h2>
+        </a>
         <nav>
-        <nav>
-            <a href="{{ route('donate.form') }}">Donate</a>
-            <a href="#">News</a>
+            <div class="dropdown">
+                <a href="#">Donate ▾</a>
+                <div class="dropdown-content">
+                    <a href="{{ route('donate.form') }}">Make a Donation</a>
+                    <a href="{{ route('donation.history') }}">Donation History</a>
+                </div>
+            </div>
+            <a href="{{ route('articles.index') }}">News</a>
             <a href="#">Merch</a>
             <a href="#">Plant Cart</a>
             <a href="#">Seeds</a>
             <a href="#">Campaign</a>
             <a href="#">Marketplace</a>
         </nav>
-
-        </nav>
         <div class="icons">
-            <img src="images/notifications-24px 1.svg" alt="">
-            <img src="images/settings-24px 1.svg" alt="">
-            <img src="images/Ellipse 14.png" alt="">
+            <img src="images/notifications-24px 1.svg" alt="Notifications">
+            <img src="images/settings-24px 1.svg" alt="Settings">
+
+            <div class="profile-dropdown">
+                <span class="profile-name">Hi, {{ Auth::user()->name ?? 'User' }} ▾</span>
+                <div class="profile-dropdown-content">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
+
     <main>
         <div class="poster">
-        <img src="images/donation-image.png" alt="">
-        <button> Donate Now</button>
+            <img src="images/donation-image.png" alt="Charity Poster">
+            <button>Donate Now</button>
         </div>
-        
     </main>
 </body>
 </html>

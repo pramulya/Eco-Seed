@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Eco-Seed | Make a Donation</title>
@@ -23,7 +24,7 @@
             padding: 5px 15px;
         }
 
-        .navbar a {
+        a {
             text-decoration: none;
             color: black;
         }
@@ -31,31 +32,116 @@
         nav {
             display: inline-flex;
             justify-content: center;
+            align-items: center;
             gap: 10px;
         }
 
-        nav a {
+        nav a,
+        .dropdown > a {
             font-size: 1.1rem;
             font-weight: 600;
             border-radius: 10px;
             padding: 20px 10px;
+            display: inline-block;
         }
 
-        nav a:hover {
+        nav a:hover,
+        .dropdown:hover > a {
             background-color: rgb(87, 134, 48);
             transition: 0.3s;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #e5ffe5;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         .icons {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
 
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-name {
+            cursor: pointer;
+            font-weight: 600;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .profile-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 140px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .profile-dropdown-content form {
+            margin: 0;
+        }
+
+        .profile-dropdown-content button {
+            background: none;
+            border: none;
+            width: 100%;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .profile-dropdown-content button:hover {
+            background-color: #e5ffe5;
+        }
+
+        .profile-dropdown:hover .profile-dropdown-content {
+            display: block;
+        }
 
         header img.tree-header {
             width: 60%;
             max-height: 500px;
             object-fit: cover;
+            border-bottom: 4px solid #00a300;
             margin-left: 20%;
             margin-top: 20px;
         }
@@ -139,43 +225,57 @@
         document.addEventListener('DOMContentLoaded', function () {
             toggleCardFields();
 
-
             @if(session('success'))
                 alert("{{ session('success') }}");
             @endif
         });
     </script>
 </head>
+
 <body>
 
-
+    <!-- 🌿 Navbar -->
     <header class="navbar">
-        <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
+        <a href="{{ route('dashboard') }}">
+            <h2>Eco-Seed</h2>
+        </a>
         <nav>
-        <nav>
-            <a href="{{ route('donate.form') }}">Donate</a>
-        <a href="#">News</a>
-        <a href="#">Merch</a>
-        <a href="#">Plant Cart</a>
-        <a href="#">Seeds</a>
-        <a href="#">Campaign</a>
-        <a href="#">Marketplace</a>
-</nav>
-
+            <div class="dropdown">
+                <a href="#">Donate ▾</a>
+                <div class="dropdown-content">
+                    <a href="{{ route('donate.form') }}">Make a Donation</a>
+                    <a href="{{ route('donation.history') }}">Donation History</a>
+                </div>
+            </div>
+            <a href="#">News</a>
+            <a href="#">Merch</a>
+            <a href="#">Plant Cart</a>
+            <a href="#">Seeds</a>
+            <a href="#">Campaign</a>
+            <a href="#">Marketplace</a>
         </nav>
         <div class="icons">
             <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="Notifications">
             <img src="{{ asset('images/settings-24px 1.svg') }}" alt="Settings">
-            <img src="{{ asset('images/Ellipse 14.png') }}" alt="Profile">
+
+            <div class="profile-dropdown">
+                <span class="profile-name">Hi, {{ Auth::user()->name ?? 'User' }} ▾</span>
+                <div class="profile-dropdown-content">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
 
-
+    <!-- 🌳 Tree Image -->
     <header>
         <img src="{{ asset('images/Big Tree Image.jpg') }}" alt="Big tree image" class="tree-header">
     </header>
 
-
+    <!-- 💳 Donation Form -->
     <form action="{{ route('donate.submit') }}" method="POST">
         @csrf
         <div class="container">
@@ -219,11 +319,11 @@
             </div>
         </div>
 
-
         <div class="continue-button">
             <button type="submit">Make Payment</button>
         </div>
     </form>
 
 </body>
+
 </html>

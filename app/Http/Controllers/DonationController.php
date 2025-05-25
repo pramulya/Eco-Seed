@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donation;
+use Illuminate\Support\Facades\Auth;
+
 
 class DonationController extends Controller
 {
@@ -25,6 +27,7 @@ class DonationController extends Controller
         ]);
 
         Donation::create([
+            'user_id' => Auth::id(),
             'name' => $request->name,
             'email' => $request->email,
             'amount' => $request->amount,
