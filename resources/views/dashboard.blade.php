@@ -22,23 +22,94 @@
         display: inline-flex;
         justify-content: center;
         gap: 10px;
+        align-items: center;
     }
 
-    nav a {
+    nav a,
+    .dropdown > a {
         font-size: 1.1rem;
         font-weight: 600;
         border-radius: 10px;
         padding: 20px 10px;
+        display: inline-block;
     }
 
-    nav a:hover {
+    nav a:hover,
+    .dropdown:hover > a {
         background-color: rgb(87, 134, 48);
         transition: 0.3s;
     }
 
-    nav .icons {
+    .icons {
         display: flex;
         gap: 30px;
+        align-items: center;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+
+    .dropdown-content a,
+    .profile-dropdown-content button {
+        color: black;
+        padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+    }
+
+    .dropdown-content a:hover,
+    .profile-dropdown-content button:hover {
+        background-color: #e5ffe5;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .profile-dropdown:hover .profile-dropdown-content {
+        display: block;
+    }
+
+    .profile-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-name {
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .profile-dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #fff;
+        min-width: 140px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        border-radius: 8px;
+        text-align: left;
     }
 
     main .poster {
@@ -70,35 +141,41 @@
             <h2>Eco-Seed</h2>
         </a>
         <nav>
-            <nav>
-                <a href="{{ route('donate.form') }}">Donate</a>
-                <a href="{{ route('articles.index') }}">News</a>
-                <a href="#">Merch</a>
-                <a href="#">Plant Cart</a>
-                <a href="#">Seeds</a>
-                <a href="#">Campaign</a>
-                <a href="#">Marketplace</a>
-            </nav>
-
+            <div class="dropdown">
+                <a href="#">Donate ▾</a>
+                <div class="dropdown-content">
+                    <a href="{{ route('donate.form') }}">Make a Donation</a>
+                    <a href="{{ route('donation.history') }}">Donation History</a>
+                </div>
+            </div>
+            <a href="{{ route('articles.index') }}">News</a>
+            <a href="#">Merch</a>
+            <a href="#">Plant Cart</a>
+            <a href="#">Seeds</a>
+            <a href="#">Campaign</a>
+            <a href="#">Marketplace</a>
         </nav>
         <div class="icons">
-            <img src="images/notifications-24px 1.svg" alt="">
-            <img src="images/settings-24px 1.svg" alt="">
-            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                @csrf
-                <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
-                    <img src="images/Ellipse 14.png" alt="Logout" />
-                </button>
-            </form>
+            <img src="images/notifications-24px 1.svg" alt="Notifications">
+            <img src="images/settings-24px 1.svg" alt="Settings">
+
+            <div class="profile-dropdown">
+                <span class="profile-name">Hi, {{ Auth::user()->name ?? 'User' }} ▾</span>
+                <div class="profile-dropdown-content">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
+
     <main>
         <div class="poster">
-            <img src="images/donation-image.png" alt="">
-            <button> Donate Now</button>
+            <img src="images/donation-image.png" alt="Charity Poster">
+            <button>Donate Now</button>
         </div>
-
     </main>
 </body>
-
 </html>

@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 // Donation
-Route::middleware(CheckLoggedIn::class)->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/donate', [DonationController::class, 'showForm'])->name('donate.form');
     Route::post('/donate', [DonationController::class, 'submitDonation'])->name('donate.submit');
     Route::get('/donation-history', [DonationController::class, 'history'])->name('donation.history');
