@@ -234,7 +234,6 @@
 
 <body>
 
-    <!-- 🌿 Navbar -->
     <header class="navbar">
         <a href="{{ route('dashboard') }}">
             <h2>Eco-Seed</h2>
@@ -245,6 +244,7 @@
                 <div class="dropdown-content">
                     <a href="{{ route('donate.form') }}">Make a Donation</a>
                     <a href="{{ route('donation.history') }}">Donation History</a>
+                    <a href="{{ route('subscription.manage') }}">Subscription</a>
                 </div>
             </div>
             <a href="#">News</a>
@@ -270,12 +270,10 @@
         </div>
     </header>
 
-    <!-- 🌳 Tree Image -->
     <header>
         <img src="{{ asset('images/Big Tree Image.jpg') }}" alt="Big tree image" class="tree-header">
     </header>
 
-    <!-- 💳 Donation Form -->
     <form action="{{ route('donate.submit') }}" method="POST">
         @csrf
         <div class="container">

@@ -9,6 +9,7 @@ use App\Livewire\DisplayCart;
 use App\Livewire\Checkout;
 use App\Livewire\Actions\Logout;
 use App\Http\Middleware\CheckLoggedIn;
+use App\Http\Controllers\SubscriptionController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -22,6 +23,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/donate', [DonationController::class, 'showForm'])->name('donate.form');
     Route::post('/donate', [DonationController::class, 'submitDonation'])->name('donate.submit');
     Route::get('/donation-history', [DonationController::class, 'history'])->name('donation.history');
+});
+
+// Subscription
+Route::middleware(['auth'])->group(function () {
+    Route::get('/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
+    Route::post('/subscription/store', [SubscriptionController::class, 'store'])->name('subscription.store');
+    Route::get('/subscription/manage', [SubscriptionController::class, 'manage'])->name('subscription.manage');
+    Route::post('/subscription/update', [SubscriptionController::class, 'update'])->name('subscription.update');
+    Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 });
 
 // Dashboard

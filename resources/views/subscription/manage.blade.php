@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Subscription | Eco-Seed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: "Plus Jakarta Sans", sans-serif; background: #f4f4f4; }
+        .container { max-width: 700px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; }
+        label { font-weight: 600; margin-top: 15px; display: block; }
+        input, select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 15px; }
+        .alert-success { background: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 10px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; color: white; cursor: pointer; }
+        .btn-update { background: #007bff; }
+        .btn-cancel { background: #dc3545; margin-top: 10px; }
+    </style>
+</head>
 <style>
     body {
         margin: 0;
@@ -172,11 +189,53 @@
         </div>
     </header>
 
-    <main>
-        <div class="poster">
-            <img src="images/donation-image.png" alt="Charity Poster">
-            <button>Donate Now</button>
-        </div>
-    </main>
+<body>
+
+    <div class="container">
+        <h2>Manage Your Subscription</h2>
+
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if($subscription)
+            <p><strong>Amount:</strong> ${{ $subscription->amount }}</p>
+            <p><strong>Payment Method:</strong> {{ ucfirst($subscription->payment_method) }}</p>
+            <p><strong>Frequency:</strong> {{ ucfirst($subscription->frequency) }}</p>
+            <p><strong>Next Renewal:</strong> {{ $subscription->next_renewal_at->format('Y-m-d') }}</p>
+            <p><strong>Status:</strong> {{ $subscription->active ? 'Active' : 'Canceled' }}</p>
+
+            @if($subscription->active)
+            <form action="{{ route('subscription.update') }}" method="POST">
+                @csrf
+                <label>Amount</label>
+                <input type="number" name="amount" value="{{ $subscription->amount }}" required>
+
+                <label>Payment Method</label>
+                <select name="payment_method" required>
+                    <option value="paypal" @selected($subscription->payment_method == 'paypal')>PayPal</option>
+                    <option value="card" @selected($subscription->payment_method == 'card')>Credit/Debit Card</option>
+                    <option value="apple_pay" @selected($subscription->payment_method == 'apple_pay')>Apple Pay</option>
+                </select>
+
+                <label>Frequency</label>
+                <select name="frequency" required>
+                    <option value="monthly" @selected($subscription->frequency == 'monthly')>Monthly</option>
+                    <option value="yearly" @selected($subscription->frequency == 'yearly')>Yearly</option>
+                </select>
+
+                <button class="btn btn-update">Update</button>
+            </form>
+
+            <form action="{{ route('subscription.cancel') }}" method="POST">
+                @csrf
+                <button class="btn btn-cancel">Cancel Subscription</button>
+            </form>
+            @endif
+        @else
+            <p>You don’t have a subscription yet.</p>
+            <a href="{{ route('subscription.create') }}" class="btn btn-update">Set Up Subscription</a>
+        @endif
+    </div>
 </body>
 </html>
