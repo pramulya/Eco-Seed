@@ -19,9 +19,10 @@ class ShippingAddress extends Component
     'notes' => 'nullable|string|max:500',
   ];
 
-  public function updatedCity()
+  public function updatedCity($value)
   {
-    $this->emit('shippingAddressUpdated', $this->city);
+    // Dispatch event with named parameter 'city' as a string
+    $this->dispatch('shippingCityUpdated', ['city' => $value]);
   }
 
   public function save()
@@ -32,7 +33,7 @@ class ShippingAddress extends Component
 
     $this->saved = true;
 
-    $this->emit('shippingAddressUpdated', $this->city);
+    $this->dispatch('shippingAddressUpdated', ['city' => $this->city]);
   }
 
   public function edit()
