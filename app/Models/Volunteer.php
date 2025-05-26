@@ -11,8 +11,9 @@ class Volunteer extends Model
         'email',
         'phone',
         'motivation',
-        'availability',
         'skills',
+        'availability_date',
+        'availability_time',
         'campaign_id'
     ];
 

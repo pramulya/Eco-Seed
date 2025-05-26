@@ -10,14 +10,12 @@ return new class extends Migration
     {
         Schema::create('volunteers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->text('motivation');
-            $table->date('availability_date');    // Changed from string availability
-            $table->string('availability_time');  // Added new field
-            $table->text('skills');
-            $table->foreignId('campaign_id')->nullable(); // Made nullable for now
+            $table->date('availability_date');
             $table->timestamps();
         });
     }

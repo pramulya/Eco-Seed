@@ -189,7 +189,11 @@
                     </div>
                     <a href="{{ route('donate.form') }}" class="btn btn-donate">Donate Now</a>
                 </div>
-            </div>
+                <div class="action-row">
+                        <a href="{{ route('volunteer.register', $campaign->id) }}" class="btn btn-success">Volunteer</a>
+                         <a href="{{ route('volunteer.index', $campaign->id) }}" class="btn btn-info">View Volunteers</a>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>

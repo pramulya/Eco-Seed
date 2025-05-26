@@ -1,74 +1,40 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="header-section">
-        <h2>Volunteer Opportunities</h2>
-    </div>
-
-    <div class="volunteer-grid">
-        @if($volunteers->count() > 0)
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Campaign</th>
-                            <th>Volunteer Name</th>
-                            <th>Availability</th>
-                            <th>Skills</th>
-                            <th>Join Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($volunteers as $volunteer)
-                            <tr>
-                                <td>{{ $volunteer->campaign->campaign_name }}</td>
-                                <td>{{ $volunteer->name }}</td>
-                                <td>{{ $volunteer->availability }}</td>
-                                <td>{{ $volunteer->skills }}</td>
-                                <td>{{ $volunteer->created_at->format('d M Y') }}</td>
-                                <td>
-                                    <a href="{{ route('volunteer.create', $volunteer->campaign_id) }}" 
-                                       class="btn btn-primary">Join as Volunteer</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @else
-            <p class="text-center">No volunteer opportunities available at the moment.</p>
-        @endif
-    </div>
-</div>
-
-<style>
-    .header-section {
-        margin: 30px 0;
-        text-align: center;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input { width: 100%; padding: 8px; }
+        button { padding: 10px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Volunteer Registration</h1>
     
-    .volunteer-grid {
-        background: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+    @if(session('success'))
+        <div style="color: green; margin-bottom: 15px;">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    .table {
-        margin-top: 20px;
-    }
+    <form action="{{ route('volunteer.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
+        
+        <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
 
-    .btn-primary {
-        background-color: #95eb50;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 8px;
-    }
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
 
-    .btn-primary:hover {
-        background-color: #7bc942;
-    }
-</style>
-@endsection
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

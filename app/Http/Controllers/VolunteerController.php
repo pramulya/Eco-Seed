@@ -8,40 +8,43 @@ use Illuminate\Http\Request;
 
 class VolunteerController extends Controller
 {
-    public function create($campaign_id)
+    public function main() // This method must exist
     {
-        $campaign = Campaign::findOrFail($campaign_id);
-        return view('volunteer.create', compact('campaign'));
+        return view('volunteer.main');
     }
 
-    public function store(Request $request)
+    public function view($campaignId)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-            'motivation' => 'required|string',
-            'availability' => 'required|string',
-            'skills' => 'required|string',
-            'campaign_id' => 'required|exists:campaigns,id'
-        ]);
-
-        Volunteer::create($validated);
-
-        return redirect()->route('campaign.show', $request->campaign_id)
-            ->with('success', 'Thank you for volunteering! We will contact you soon.');
+        $campaign = Campaign::with('volunteers')->findOrFail($campaignId);
+        return view('volunteer.view', compact('campaign'));
     }
 
-    public function index($campaign_id)
+    public function index($campaignId)
     {
-        $campaign = Campaign::findOrFail($campaign_id);
-        $volunteers = Volunteer::where('campaign_id', $campaign_id)->get();
+        $campaign = Campaign::findOrFail($campaignId);
+        $volunteers = Volunteer::where('campaign_id', $campaignId)->get();
         return view('volunteer.index', compact('campaign', 'volunteers'));
     }
 
-    public function mainIndex()
+    public function create($campaignId)
     {
-        $volunteers = Volunteer::with('campaign')->get();
-        return view('volunteer.main', compact('volunteers'));
+        $campaign = Campaign::findOrFail($campaignId);
+        return view('volunteer.register', compact('campaign'));
+    }
+
+    public function store(Request $request, $campaignId)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:volunteers,email',
+            'phone' => 'required|string|max:20',
+            'motivation' => 'required|string',
+            'availability_date' => 'required|date'
+        ]);
+
+        Volunteer::create(array_merge($validated, ['campaign_id' => $campaignId]));
+
+        return redirect()->route('volunteer.index', $campaignId)
+               ->with('success', 'Thank you for volunteering!');
     }
 }
