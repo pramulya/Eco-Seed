@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recurring Donation | Eco-Seed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: "Plus Jakarta Sans", sans-serif; background: #f4f4f4; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; }
+        label { font-weight: 600; display: block; margin-top: 15px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; }
+        button { margin-top: 20px; padding: 12px 25px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .alert-success { background: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-top: 10px; }
+    </style>
+    <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -201,43 +216,38 @@
         </div>
     </header>
 
+</head>
+<body>
+
+
     <div class="container">
-        <h2>Your Donation History</h2>
+        <h2>Set Up Recurring Donation</h2>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                @if(session('success'))
-                    alert("{{ session('success') }}");
-                @endif
-            });
-        </script>
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
 
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Amount</th>
-                    <th>Payment Method</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($donations as $donation)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>${{ number_format($donation->amount, 2) }}</td>
-                        <td>{{ ucfirst($donation->payment_method) }}</td>
-                        <td>{{ $donation->created_at->format('Y-m-d H:i') }}</td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4">No donations yet.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+        <form action="{{ route('subscription.store') }}" method="POST">
+            @csrf
+            <label>Amount</label>
+            <input type="number" name="amount" required min="1">
+
+            <label>Payment Method</label>
+            <select name="payment_method" required>
+                <option value="">-- Select --</option>
+                <option value="paypal">PayPal</option>
+                <option value="card">Credit/Debit Card</option>
+                <option value="apple_pay">Apple Pay</option>
+            </select>
+
+            <label>Frequency</label>
+            <select name="frequency" required>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+            </select>
+
+            <button type="submit">Subscribe</button>
+        </form>
     </div>
-
 </body>
-
 </html>
