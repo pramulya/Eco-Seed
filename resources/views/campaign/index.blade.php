@@ -122,19 +122,39 @@
 
         .btn-edit {
             background-color: #EEFF6B;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn-delete {
             background-color: #ff6b6b;
             color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-volunteer {
+            background-color: #95eb50;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-view-volunteers {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn-donate {
             background-color: #95eb50;
-            color: white;
-            width: 100%;
-            padding: 12px;
-            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn:hover {
@@ -190,8 +210,8 @@
                     <a href="{{ route('donate.form') }}" class="btn btn-donate">Donate Now</a>
                 </div>
                 <div class="action-row">
-                        <a href="{{ route('volunteer.register', $campaign->id) }}" class="btn btn-success">Volunteer</a>
-                         <a href="{{ route('volunteer.index', $campaign->id) }}" class="btn btn-info">View Volunteers</a>
+                <a href="{{ route('volunteer.register', $campaign->id) }}" class="btn btn-volunteer">Volunteer</a>
+                <a href="{{ route('volunteer.index', $campaign->id) }}" class="btn btn-view-volunteers">View Volunteers</a>
                     </div>
                 </div>
             @endforeach
