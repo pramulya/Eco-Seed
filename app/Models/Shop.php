@@ -8,7 +8,7 @@ class Shop extends Model
 {
     protected $table = 'shops';
 
-    protected $fillable = ['shop_name', 'shop_description'];
+    protected $fillable = ['shop_name', 'shop_description', 'shop_city'];
 
     public function products()
     {
