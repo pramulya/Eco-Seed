@@ -28,6 +28,9 @@ new #[Layout('layouts.guest')] class extends Component
         $this->email = request()->string('email');
     }
 
+    /**
+     * Reset the password for the given user.
+     */
     public function resetPassword(): void
     {
         $this->validate([
