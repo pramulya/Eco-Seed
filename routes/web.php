@@ -45,9 +45,7 @@ Route::middleware(CheckLoggedIn::class)->group(function () {
     Route::get('/checkout', Checkout::class)->name('checkout');
 });
 
-// Articles
-Route::get('/news', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/news/{id}', [ArticleController::class, 'show'])->name('articles.show');
+
 
 // Campaigns
 Route::middleware(CheckLoggedIn::class)->group(function () {
@@ -70,3 +68,12 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 require __DIR__ . '/auth.php';
+
+
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('/articles/confirm/{id}', [ArticleController::class, 'confirm'])->name('articles.confirm');
+Route::post('/articles/publish/{id}', [ArticleController::class, 'publish'])->name('articles.publish');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/articles/all', [ArticleController::class, 'all'])->name('articles.all');

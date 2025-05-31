@@ -15,17 +15,15 @@
         {{ $article->title }}
     </h1>
 
-    {{-- Tambahkan ini untuk short description --}}
+    {{-- Deskripsi --}}
     <p style="margin-top: 10px; font-size: 1.1rem; color: #555; font-weight: 700;">
-        {{ $article->description }}
+        {{ $article->description ?? 'No description provided' }}
     </p>
 
     {{-- Nama penulis (sementara dummy) --}}
-    <p style="color: orangered; font-weight: 500;">A Story By {{ $article->author }}
-        
-    </p>
+    <p style="color: orangered; font-weight: 500;">A Story By {{ $article->author ?? 'Unknown Author' }}</p>
 
-    {{-- Konten --}}
+    {{-- Konten Artikel --}}
     <p style="line-height: 1.8; color: #333;">
         {{ $article->content }}
     </p>
