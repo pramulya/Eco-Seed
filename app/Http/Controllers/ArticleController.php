@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ArticleController extends Controller
 {
@@ -35,20 +37,19 @@ class ArticleController extends Controller
         return view('articles.index', compact('main_article', 'other_articles', 'trending', 'old_articles'));
     }
 
-
     public function all()
     {
-        // Mengambil semua artikel yang sudah dipublikasikan
-        $articles = Article::where('status', 'published')
-                            ->orderBy('published_at', 'desc')
-                            ->paginate(10);  // Menggunakan pagination agar lebih rapih dan mengurangi beban di database
+        $allArticles = Article::where('status', 'published')
+                        ->orderBy('published_at', 'desc')
+                        ->paginate(10);
 
-        // Kirim data artikel ke view all-articles
-        return view('articles.all', compact('articles'));
+        $myArticles = Article::where('status', 'published')
+                        ->where('author', Auth::user()->name)
+                        ->orderBy('published_at', 'desc')
+                        ->get();
+
+        return view('articles.all', compact('allArticles', 'myArticles'));
     }
-
-
-
 
     public function show($id)
     {
@@ -85,7 +86,7 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->status = 'published';  // Set status artikel menjadi published
         $article->published_at = now();  // Set publish time saat artikel disimpan
-        $article->author = 'User1';  // Sementara, set author statis, bisa diubah dengan auth
+        $article->author = Auth::user()->name;
 
         // Menyimpan gambar jika ada
         if ($request->hasFile('image')) {
@@ -117,6 +118,20 @@ class ArticleController extends Controller
         return redirect()->route('articles.index'); // Kembali ke halaman index artikel
     }
 
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
 
+        if ($article->author !== Auth::user()->name) {
+            return redirect()->route('articles.all')->with('error', 'You are not authorized to delete this article.');
+        }
 
+        if ($article->image_path && \Storage::disk('public')->exists($article->image_path)) {
+            \Storage::disk('public')->delete($article->image_path);
+        }
+
+        $article->delete();
+
+        return redirect()->route('articles.all')->with('success', 'Article deleted successfully.');
+    }
 }

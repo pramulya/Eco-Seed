@@ -93,6 +93,9 @@ Route::middleware(CheckLoggedIn::class)->group(function () {
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
     Route::get('/articles/confirm/{id}', [ArticleController::class, 'confirm'])->name('articles.confirm');
     Route::post('/articles/publish/{id}', [ArticleController::class, 'publish'])->name('articles.publish');
-    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
     Route::get('/articles/all', [ArticleController::class, 'all'])->name('articles.all');
+    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+    Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
+
 });
