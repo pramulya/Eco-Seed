@@ -155,6 +155,8 @@
             <a href="#">Seeds</a>
             <a href="#">Campaign</a>
             <a href="#">Marketplace</a>
+            <<a href="{{ route('pings.index') }}">Ping</a>
+
         </nav>
         <div class="icons">
             <img src="images/notifications-24px 1.svg" alt="Notifications">

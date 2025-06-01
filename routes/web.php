@@ -10,6 +10,7 @@ use App\Livewire\Checkout;
 use App\Livewire\Actions\Logout;
 use App\Http\Middleware\CheckLoggedIn;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\PingController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -77,3 +78,15 @@ Route::get('/articles/confirm/{id}', [ArticleController::class, 'confirm'])->nam
 Route::post('/articles/publish/{id}', [ArticleController::class, 'publish'])->name('articles.publish');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/articles/all', [ArticleController::class, 'all'])->name('articles.all');
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pings', [PingController::class, 'index'])->name('pings.index');
+    Route::get('/pings/create', [PingController::class, 'create'])->name('pings.create');
+    Route::post('/pings', [PingController::class, 'store'])->name('pings.store');
+    Route::get('/pings/{ping}/edit', [PingController::class, 'edit'])->name('pings.edit');
+    Route::put('/pings/{ping}', [PingController::class, 'update'])->name('pings.update');
+    Route::delete('/pings/{ping}', [PingController::class, 'destroy'])->name('pings.destroy');
+    Route::resource('pings', PingController::class);
+});
