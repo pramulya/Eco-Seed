@@ -64,21 +64,17 @@ Route::middleware(CheckLoggedIn::class)->group(function () {
     Route::post('/logout', Logout::class)->name('logout');
 });
 
+use App\Http\Controllers\OrderController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkorder', [OrderController::class, 'index'])->name('checkorder');
+});
+
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
 require __DIR__ . '/auth.php';
-
-
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('/articles/confirm/{id}', [ArticleController::class, 'confirm'])->name('articles.confirm');
-Route::post('/articles/publish/{id}', [ArticleController::class, 'publish'])->name('articles.publish');
-Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('/articles/all', [ArticleController::class, 'all'])->name('articles.all');
-
 
 
 Route::middleware(['auth'])->group(function () {
@@ -89,4 +85,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/pings/{ping}', [PingController::class, 'update'])->name('pings.update');
     Route::delete('/pings/{ping}', [PingController::class, 'destroy'])->name('pings.destroy');
     Route::resource('pings', PingController::class);
+});
+//articles
+Route::middleware(CheckLoggedIn::class)->group(function () {
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/articles/confirm/{id}', [ArticleController::class, 'confirm'])->name('articles.confirm');
+    Route::post('/articles/publish/{id}', [ArticleController::class, 'publish'])->name('articles.publish');
+    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+    Route::get('/articles/all', [ArticleController::class, 'all'])->name('articles.all');
 });
