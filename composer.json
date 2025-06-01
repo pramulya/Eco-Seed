@@ -12,7 +12,9 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.6",
         "livewire/volt": "^1.7.0",
-        "openai-php/client": "^0.13.0"
+        "midtrans/midtrans-php": "^2.6",
+        "openai-php/client": "^0.13.0",
+        "stripe/stripe-php": "^17.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

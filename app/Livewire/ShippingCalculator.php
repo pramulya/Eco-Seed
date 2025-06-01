@@ -9,11 +9,11 @@ use OpenAI;
 
 class ShippingCalculator extends Component
 {
-    public $shippingCity; // Destination city from shipping address (string)
-    public $cartItems;    // Cart items grouped by shop_id
-    public $shippingCosts = []; // Shipping cost per shop
-    public $selectedShipping = []; // Selected shipping option per shop
-    public $openDropdowns = []; // For UI dropdown toggling
+    public $shippingCity;
+    public $cartItems;
+    public $shippingCosts = [];
+    public $selectedShipping = [];
+    public $openDropdowns = [];
 
     protected ?ShippingCostEstimator $shippingCostEstimator = null;
 
@@ -27,7 +27,6 @@ class ShippingCalculator extends Component
         $this->shippingCostEstimator = new ShippingCostEstimator();
     }
 
-    // Listener now accepts array payload and extracts the city string
     public function setShippingCity(array $payload)
     {
         $city = $payload['city'] ?? '';
@@ -62,7 +61,6 @@ class ShippingCalculator extends Component
             return;
         }
 
-        // Safety check to ensure shippingCostEstimator is initialized
         if ($this->shippingCostEstimator === null) {
             $this->shippingCostEstimator = new ShippingCostEstimator();
         }
