@@ -6,35 +6,36 @@ use Livewire\Component;
 
 class ShippingAddress extends Component
 {
+  public $name = '';
   public $street = '';
   public $city = '';
-  public $postal = '';
-  public $notes = '';
+  public $postal_code = '';
+  public $phone = '';
   public $saved = false;
 
   protected $rules = [
-    'street' => 'required|string|max:255',
-    'city' => 'required|string|max:255',
-    'postal' => 'required|string|max:20',
-    'notes' => 'nullable|string|max:500',
+    'name' => 'required|string|max:255',
+    'street' => 'required|string',
+    'city' => 'required|string',
+    'postal_code' => 'required|string|max:20',
+    'phone' => 'required|string|max:20',
   ];
-
-  public function updatedCity($value)
-  {
-    // Dispatch event with named parameter 'city' as a string
-    $this->dispatch('shippingCityUpdated', ['city' => $value]);
-  }
-
   public function save()
   {
     $this->validate();
 
-    // Optionally save to database here
-
     $this->saved = true;
 
-    $this->dispatch('shippingAddressUpdated', ['city' => $this->city]);
+    $this->dispatch('shippingAddressUpdated', [
+      'name' => $this->name,
+      'phone' => $this->phone,
+      'city' => $this->city,
+      'street' => $this->street,
+      'postal_code' => $this->postal_code,
+    ]);
   }
+
+
 
   public function edit()
   {
