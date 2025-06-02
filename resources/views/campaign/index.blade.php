@@ -205,9 +205,11 @@
                 <div class="campaign-info">
                     <p><strong>Type:</strong> {{ $campaign->campaign_type }}</p>
                     <p><strong>Category:</strong> {{ $campaign->campaign_category }}</p>
+                    <p><strong>Organizer:</strong> {{ $campaign->campaign_organizer }}</p>
                     <p><strong>Target:</strong> ${{ number_format($campaign->campaign_target, 2) }}</p>
+                    <p><strong>Start Date:</strong> {{ \Carbon\Carbon::parse($campaign->campaign_start_date)->format('M d, Y') }}</p>
                     <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($campaign->campaign_end_date)->format('M d, Y') }}</p>
-                    <p><strong>Description:</strong> {{ Str::limit($campaign->campaign_description, 100) }}</p>
+                    <p><strong>Description:</strong> {{ Str::limit($campaign->campaign_description, 300) }}</p>
                 </div>
                 <div class="campaign-actions">
                     <div class="action-row">
