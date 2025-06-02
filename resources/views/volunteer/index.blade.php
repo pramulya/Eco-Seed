@@ -113,6 +113,8 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Motivation</th>
+                        <th>Availability Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,12 +123,14 @@
                         <td>{{ $volunteer->name }}</td>
                         <td>{{ $volunteer->email }}</td>
                         <td>{{ $volunteer->phone }}</td>
+                        <td>{{ $volunteer->motivation }}</td>
+                        <td>{{ $volunteer->availability_date ? \Carbon\Carbon::parse($volunteer->availability_date)->format('M d, Y') : 'Not specified' }}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         @else
-            <p>No volunteers have registered yet.</p>
+            <p>No volunteers have registered yet, if you have already registered. please call or message the campaign host.</p>
         @endif
 
         <a href="{{ route('campaign.index') }}" class="back-btn">Back to Campaigns</a>

@@ -92,6 +92,14 @@
             border-radius: 5px;
             margin-bottom: 15px;
         }
+
+        .campaign-description {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +125,10 @@
         <div class="form-container">
             <h1>Volunteer for: {{ $campaign->campaign_name }}</h1>
             
+            <div class="campaign-description">
+                <p>{{ $campaign->campaign_description }}</p>
+            </div>
+            
             @if($errors->any())
                 <div class="alert-error">
                     <ul>
@@ -127,7 +139,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('volunteer.store', $campaign->id) }}" method="POST">
+            <form action="{{ route('volunteer.store', $campaign->id) }}" method="POST" onsubmit="showNotification()">
                 @csrf
                 
                 <div class="form-group">
@@ -157,7 +169,44 @@
 
                 <button type="submit" class="btn-submit">Register as Volunteer</button>
             </form>
+
+            <script>
+            function showNotification() {
+                alert('Thank you for registering as a volunteer! Your information is being submitted.');
+            }
+            </script>
         </div>
     </div>
+// Add this to your <style> section
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #95eb50;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+    font-weight: 600;
+}
+
+// Add this before </body>
+<div id="toast" class="toast">Thank you for registering as a volunteer!</div>
+
+<script>
+function showToast() {
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 3000);
+}
+
+document.querySelector('form').addEventListener('submit', function() {
+    showToast();
+});
+</script>
 </body>
 </html>

@@ -107,17 +107,27 @@
 
         .campaign-actions {
             display: flex;
+            flex-direction: column;
             gap: 10px;
             margin-top: 20px;
         }
-
+        
+        .action-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
         .btn {
             padding: 10px 20px;
             border-radius: 10px;
             border: none;
             font-weight: 600;
+            font-size: 14px;
+            text-align: center;
             cursor: pointer;
             transition: 0.3s;
+            min-width: 100px; /* Ensure minimum width */
         }
 
         .btn-edit {
@@ -136,7 +146,7 @@
         }
 
         .btn-volunteer {
-            background-color: #95eb50;
+            background-color:rgb(80, 214, 235);
             padding: 10px 20px;
             border-radius: 10px;
             font-weight: 600;
@@ -145,7 +155,7 @@
         .btn-view-volunteers {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 40px;
             border-radius: 10px;
             font-weight: 600;
         }
@@ -197,6 +207,7 @@
                     <p><strong>Category:</strong> {{ $campaign->campaign_category }}</p>
                     <p><strong>Target:</strong> ${{ number_format($campaign->campaign_target, 2) }}</p>
                     <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($campaign->campaign_end_date)->format('M d, Y') }}</p>
+                    <p><strong>Description:</strong> {{ Str::limit($campaign->campaign_description, 100) }}</p>
                 </div>
                 <div class="campaign-actions">
                     <div class="action-row">

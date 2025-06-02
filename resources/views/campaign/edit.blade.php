@@ -172,6 +172,11 @@
                         <option value="Conservation" {{ $campaign->campaign_type == 'Conservation' ? 'selected' : '' }}>Conservation</option>
                         <option value="Education" {{ $campaign->campaign_type == 'Education' ? 'selected' : '' }}>Education</option>
                         <option value="Community" {{ $campaign->campaign_type == 'Community' ? 'selected' : '' }}>Community</option>
+                        <option value="Medical Aid">Medical Aid</option>
+                        <option value="Disaster Recovery">Disaster Recovery</option>
+                        <option value="Animal Rescue">Animal Rescue</option>
+                        <option value="Clean Water Access">Clean Water Access</option>
+                        <option value="Housing Support">Housing Support</option>
                     </select>
                 </div>
 
@@ -182,6 +187,11 @@
                         <option value="Environmental" {{ $campaign->campaign_category == 'Environmental' ? 'selected' : '' }}>Environmental</option>
                         <option value="Social" {{ $campaign->campaign_category == 'Social' ? 'selected' : '' }}>Social</option>
                         <option value="Educational" {{ $campaign->campaign_category == 'Educational' ? 'selected' : '' }}>Educational</option>
+                        <option value="Health">Health</option>
+                        <option value="Disaster Relief">Disaster Relief</option>
+                        <option value="Animal Welfare">Animal Welfare</option>
+                        <option value="Infrastructure">Infrastructure</option>
+                        <option value="Human Rights">Human Rights</option>
                     </select>
                 </div>
 

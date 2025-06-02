@@ -48,20 +48,15 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required',
+            'campaign_name' => 'required',
+            'campaign_type' => 'required',
+            'campaign_category' => 'required',
+            'campaign_organizer' => 'required',
+            'campaign_target' => 'required|numeric',
+            'campaign_start_date' => 'required|date',
+            'campaign_end_date' => 'required|date',
             'description' => 'required',
-            'target_amount' => 'required|numeric',
-            'end_date' => 'required|date',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ], [
-            'title.required' => 'Please select a title for your campaign',
-            'description.required' => 'Please provide a description for your campaign',
-            'target_amount.required' => 'Please enter your fundraising target amount',
-            'target_amount.numeric' => 'The target amount must be a valid number',
-            'end_date.required' => 'Please select when your campaign will end',
-            'image.required' => 'Please select an image for your campaign',
-            'image.image' => 'The uploaded file must be an image',
-            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif'
         ]);
     
         if ($request->hasFile('image')) {

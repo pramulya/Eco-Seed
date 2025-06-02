@@ -163,6 +163,11 @@
                         <option value="Conservation">Conservation</option>
                         <option value="Education">Education</option>
                         <option value="Community">Community</option>
+                        <option value="Medical Aid">Medical Aid</option>
+                        <option value="Disaster Recovery">Disaster Recovery</option>
+                        <option value="Animal Rescue">Animal Rescue</option>
+                        <option value="Clean Water Access">Clean Water Access</option>
+                        <option value="Housing Support">Housing Support</option>
                     </select>
                 </div>
 
@@ -173,6 +178,11 @@
                         <option value="Environmental">Environmental</option>
                         <option value="Social">Social</option>
                         <option value="Educational">Educational</option>
+                        <option value="Health">Health</option>
+                        <option value="Disaster Relief">Disaster Relief</option>
+                        <option value="Animal Welfare">Animal Welfare</option>
+                        <option value="Infrastructure">Infrastructure</option>
+                        <option value="Human Rights">Human Rights</option>
                     </select>
                 </div>
 
