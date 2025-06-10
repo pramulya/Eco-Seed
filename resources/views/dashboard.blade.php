@@ -78,18 +78,17 @@ main .poster {
 <body>
     <header class="navbar">
         <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
-        <nav>
+        
         <nav>
             <a href="{{ route('donate.form') }}">Donate</a>
             <a href="#">News</a>
             <a href="#">Merch</a>
             <a href="#">Plant Cart</a>
             <a href="#">Seeds</a>
-            <a href="#">Campaign</a>
+            <a href="{{ route('campaign.index') }}">Campaign</a>
             <a href="#">Marketplace</a>
         </nav>
 
-        </nav>
         <div class="icons">
             <img src="images/notifications-24px 1.svg" alt="">
             <img src="images/settings-24px 1.svg" alt="">
