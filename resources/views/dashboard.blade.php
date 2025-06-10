@@ -153,7 +153,7 @@
             <a href="#">Merch</a>
             <a href="#">Plant Cart</a>
             <a href="#">Seeds</a>
-            <a href="#">Campaign</a>
+            <a href="{{ route('campaign.index') }}">Campaign</a>
             <a href="#">Marketplace</a>
             <<a href="{{ route('pings.index') }}">Ping</a>
 
