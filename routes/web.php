@@ -16,11 +16,6 @@ Route::post('/donate', [DonationController::class, 'submitDonation'])->name('don
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/cart', DisplayCart::class);
 
-// Simplified campaign routes
-// Remove or comment out the duplicate import
-// use App\Http\Controllers\VolunteerController;
-
-// Add these volunteer routes with the existing routes
 Route::get('/Volunteer', [VolunteerController::class, 'mainIndex'])->name('volunteer.main');
 Route::get('/volunteer/{campaign_id}/create', [VolunteerController::class, 'create'])->name('volunteer.create');
 Route::post('/volunteer', [VolunteerController::class, 'store'])->name('volunteer.store');
@@ -34,9 +29,6 @@ Route::delete('/campaigns/{campaign}', [CampaignController::class, 'destroy'])->
 Route::get('/campaigns/{campaign}/donate', [CampaignController::class, 'showDonationForm'])->name('campaigns.donate');
 Route::post('/campaigns/donate', [CampaignController::class, 'processDonation'])->name('campaigns.process-donation');
 
-// Volunteer Routes (consolidated and fixed)
-// Remove ALL existing volunteer routes and replace with:
-// Ensure ONLY these volunteer routes are present:
 Route::prefix('volunteer')->group(function () {
     Route::get('/{campaign_id}', [VolunteerController::class, 'index'])->name('volunteer.index');
     Route::get('/{campaign_id}/register', [VolunteerController::class, 'create'])->name('volunteer.register');
