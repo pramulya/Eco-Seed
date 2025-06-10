@@ -127,21 +127,40 @@
     </style>
 </head>
 <body>
-    <header class="navbar">
-        <a href="{{ route('dashboard') }}"><h2>Eco-Seed</h2></a>
+<header class="navbar">
+        <a href="{{ route('dashboard') }}">
+            <h2>Eco-Seed</h2>
+        </a>
         <nav>
-            <a href="{{ route('donate.form') }}">Donate</a>
-            <a href="#">News</a>
+            <div class="dropdown">
+                <a href="#">Donate ▾</a>
+                <div class="dropdown-content">
+                    <a href="{{ route('donate.form') }}">Make a Donation</a>
+                    <a href="{{ route('donation.history') }}">Donation History</a>
+                    <a href="{{ route('subscription.manage') }}">Subscription</a>
+                </div>
+            </div>
+            <a href="{{ route('articles.index') }}">News</a>
             <a href="#">Merch</a>
             <a href="#">Plant Cart</a>
             <a href="#">Seeds</a>
             <a href="{{ route('campaign.index') }}">Campaign</a>
             <a href="#">Marketplace</a>
-        </nav>
+            <<a href="{{ route('pings.index') }}">Ping</a>
+
         <div class="icons">
-            <img src="{{ asset('images/notifications-24px 1.svg') }}" alt="">
-            <img src="{{ asset('images/settings-24px 1.svg') }}" alt="">
-            <img src="{{ asset('images/Ellipse 14.png') }}" alt="">
+            <img src="images/notifications-24px 1.svg" alt="Notifications">
+            <img src="images/settings-24px 1.svg" alt="Settings">
+
+            <div class="profile-dropdown">
+                <span class="profile-name">Hi, {{ Auth::user()->name ?? 'User' }} ▾</span>
+                <div class="profile-dropdown-content">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
 
