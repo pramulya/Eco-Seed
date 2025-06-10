@@ -107,34 +107,64 @@
 
         .campaign-actions {
             display: flex;
+            flex-direction: column;
             gap: 10px;
             margin-top: 20px;
         }
-
+        
+        .action-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
         .btn {
             padding: 10px 20px;
             border-radius: 10px;
             border: none;
             font-weight: 600;
+            font-size: 14px;
+            text-align: center;
             cursor: pointer;
             transition: 0.3s;
+            min-width: 100px; /* Ensure minimum width */
         }
 
         .btn-edit {
             background-color: #EEFF6B;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn-delete {
             background-color: #ff6b6b;
             color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-volunteer {
+            background-color:rgb(80, 214, 235);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-view-volunteers {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 40px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn-donate {
             background-color: #95eb50;
-            color: white;
-            width: 100%;
-            padding: 12px;
-            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn:hover {
@@ -175,8 +205,11 @@
                 <div class="campaign-info">
                     <p><strong>Type:</strong> {{ $campaign->campaign_type }}</p>
                     <p><strong>Category:</strong> {{ $campaign->campaign_category }}</p>
+                    <p><strong>Organizer:</strong> {{ $campaign->campaign_organizer }}</p>
                     <p><strong>Target:</strong> ${{ number_format($campaign->campaign_target, 2) }}</p>
+                    <p><strong>Start Date:</strong> {{ \Carbon\Carbon::parse($campaign->campaign_start_date)->format('M d, Y') }}</p>
                     <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($campaign->campaign_end_date)->format('M d, Y') }}</p>
+                    <p><strong>Description:</strong> {{ Str::limit($campaign->campaign_description, 300) }}</p>
                 </div>
                 <div class="campaign-actions">
                     <div class="action-row">
@@ -189,7 +222,11 @@
                     </div>
                     <a href="{{ route('donate.form') }}" class="btn btn-donate">Donate Now</a>
                 </div>
-            </div>
+                <div class="action-row">
+                <a href="{{ route('volunteer.register', $campaign->id) }}" class="btn btn-volunteer">Volunteer</a>
+                <a href="{{ route('volunteer.index', $campaign->id) }}" class="btn btn-view-volunteers">View Volunteers</a>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>
